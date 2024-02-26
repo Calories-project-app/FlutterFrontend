@@ -7,13 +7,17 @@ class AppImagePicker {
 
   AppImagePicker({required this.source});
 
-  pick({onPick}) async {
+  pick({Function(File?)? onPick}) async {
     final ImagePicker picker = ImagePicker();
     final image = await picker.pickImage(source: source);
     if (image != null) {
-      onPick(File(image.path));
+      if (onPick != null) {
+        onPick(File(image.path));
+      }
     } else {
-      onPick(null);
+      if (onPick != null) {
+        onPick(null);
+      }
     }
   }
 }

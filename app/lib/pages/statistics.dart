@@ -1,6 +1,9 @@
 import 'package:app/%E0%B8%B5utils/api/get_food_by_id.dart';
 import 'package:app/%E0%B8%B5utils/model/GetFoodById.dart';
 import 'package:app/%E0%B8%B5utils/statics.dart';
+import 'package:app/pages/TabStatistic/allStatisticTab.dart';
+import 'package:app/pages/TabStatistic/foodStatisticTab.dart';
+import 'package:app/pages/TabStatistic/waterSatisticTab.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,18 +19,14 @@ class Statistics extends StatefulWidget {
 
 class _StatisticsState extends State<Statistics> {
   //late List<dynamic> _food;
-  late Future<GetFoodById> food;
-  Future _loadFood() async {
-    food = getFoodById('651c0e7bdc2e3d9c0ff7b6e0');
-    print(food);
-    print('this is food');
-  }
 
-  void initState() {
-    _loadFood();
-    super.initState();
-  }
+  final List<Widget> _pages = [
+    AllStisticTab(),
+    FoodStatisticTab(),
+    WaterStatisticTab()
+  ];
 
+  int current = 0;
   /* Future<void> getFood() async {
     _food = await getFoodById("656f2c960b601921f3a673f3") as List;
     setState(() {
@@ -39,9 +38,6 @@ class _StatisticsState extends State<Statistics> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Static'),
-        ),
         body: Padding(
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
             child: SafeArea(
@@ -52,7 +48,7 @@ class _StatisticsState extends State<Statistics> {
                     child: ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          primary: primaryColor,
+                          backgroundColor: primaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
@@ -68,9 +64,13 @@ class _StatisticsState extends State<Statistics> {
                     children: [
                       SizedBox(
                         child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                current = 0;
+                              });
+                            },
                             style: ElevatedButton.styleFrom(
-                              primary: primaryColor,
+                              backgroundColor: primaryColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
@@ -83,9 +83,14 @@ class _StatisticsState extends State<Statistics> {
                       ),
                       SizedBox(
                         child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                 current = 1;
+                              });
+                             
+                            },
                             style: ElevatedButton.styleFrom(
-                              primary: primaryColor,
+                              backgroundColor: primaryColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
@@ -98,9 +103,13 @@ class _StatisticsState extends State<Statistics> {
                       ),
                       SizedBox(
                         child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                 current = 2;
+                              });
+                            },
                             style: ElevatedButton.styleFrom(
-                              primary: primaryColor,
+                              backgroundColor: primaryColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
@@ -239,82 +248,7 @@ class _StatisticsState extends State<Statistics> {
                     height: 10,
                   ),
                   Expanded(
-                    child: FutureBuilder<GetFoodById>(
-                      future: food,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          print('Waiting for data...');
-                          return CircularProgressIndicator();
-                        } else if (snapshot.hasError) {
-                          print('Error: ${snapshot.error}');
-                          return Text('Error: ${snapshot.error}');
-                        } else {
-                          final foodData = snapshot.data!;
-                          print('Food Data Loaded: ${foodData.toJson()}');
-                          return ListView.builder(
-                            itemCount: foodData.foodHistory?.length ?? 0,
-                            itemBuilder: (context, index) {
-                              var foodHistory = foodData.foodHistory![index];
-                              return Container(
-                                margin: EdgeInsets.symmetric(vertical: 8.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 0.5,
-                                      blurRadius: 5,
-                                      offset: Offset(0, 3),
-                                    ),
-                                  ],
-                                ),
-                                child: Card(
-                                  elevation:
-                                      0, // Set this to 0 to remove Card's default shadow
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                  ),
-                                  child: ListTile(
-                                    leading: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                        '${foodHistory.imgPath}',
-                                      ),
-                                    ),
-                                    title: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                            '${foodHistory.foodName ?? "N/A"}'),
-                                        SizedBox(height: 5),
-                                        Row(children: [
-                                          Text(
-                                            '${foodHistory.calories ?? "N/A"}',
-                                            style: GoogleFonts.openSans(
-                                                fontSize: 22,
-                                                color: tertiaryColor,
-                                                fontWeight: FontWeight.w700),
-                                          ),
-                                          Text(
-                                            ' calories',
-                                            style: GoogleFonts.openSans(
-                                                fontSize: 12,
-                                                color: secondaryColor,
-                                                fontWeight: FontWeight.w300),
-                                          ),
-                                        ]),
-                                      ],
-                                    ),
-                                  ),
-                                  // Add other ListTile properties as needed
-                                ),
-                              );
-                            },
-                          );
-                        }
-                      },
-                    ),
+                    child: _pages[current],
                   ),
                 ],
               ),

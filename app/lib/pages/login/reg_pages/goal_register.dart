@@ -58,8 +58,7 @@ class _GoalRegisterState extends State<GoalRegister> {
             SizedBox(height: 50,),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(300, 80),
-                primary: quaternaryColor
+                minimumSize: Size(300, 80), backgroundColor: quaternaryColor
               ),
               onPressed: () {
                 MaterialPageRoute materialPageRoute = MaterialPageRoute(
@@ -75,8 +74,7 @@ class _GoalRegisterState extends State<GoalRegister> {
             SizedBox(height: 50,),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(300, 80),
-                primary: quaternaryColor
+                minimumSize: Size(300, 80), backgroundColor: quaternaryColor
               ),
               onPressed: () {
                 MaterialPageRoute materialPageRoute = MaterialPageRoute(
@@ -92,8 +90,7 @@ class _GoalRegisterState extends State<GoalRegister> {
             SizedBox(height: 50,),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(300, 80),
-                primary: quaternaryColor
+                minimumSize: Size(300, 80), backgroundColor: quaternaryColor
               ),
               onPressed: () {
                 MaterialPageRoute materialPageRoute = MaterialPageRoute(

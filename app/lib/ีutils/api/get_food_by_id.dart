@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 Future<GetFoodById> getFoodById(String userId) async {
   var url = "https://foodcal-app.up.railway.app/food-history/foodHistory/${userId}";
   var token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZmMzFkOTA1MDVlMjY3ZWJmNWVhNTciLCJpYXQiOjE3MDI5OTM4NDgsImV4cCI6MTcwMzU5ODY0OH0.o_spOgDhVCFAMcF8EbH_84q8OkRe8-6wwHYDKayD_yE';
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZmMzFkOTA1MDVlMjY3ZWJmNWVhNTciLCJpYXQiOjE3MDg0ODc3OTEsImV4cCI6MTcwOTA5MjU5MX0.RkjXI3JPRWY_0vx9x9uLrhk6hwifuilKv4kJ8dpyKuc';
   Map<String, String> requestHeaders = {
     'Content-type': 'application/json',
     'Accept': 'application/json',

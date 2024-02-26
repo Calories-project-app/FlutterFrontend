@@ -73,7 +73,7 @@ class _BirthdayRegisterState extends State<BirthdayRegister> {
               ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: quaternaryColor,
+                    backgroundColor: quaternaryColor,
                     minimumSize: Size(300, 80) 
                   ),
                   onPressed: () {

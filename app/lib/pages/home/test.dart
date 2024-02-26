@@ -4,14 +4,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class Summary_Nutrition extends StatelessWidget {
-  const Summary_Nutrition({super.key});
+class SummaryWater extends StatefulWidget {
+  const SummaryWater({super.key});
 
   @override
+  State<SummaryWater> createState() => _SummaryWaterState();
+}
+
+class _SummaryWaterState extends State<SummaryWater> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Column(
+    return Stack(
+      children: [
+      Column(
         children: <Widget>[
           Column(
             children: [
@@ -71,27 +76,15 @@ class Summary_Nutrition extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                Icon(
-                                  Icons.local_fire_department,
-                                  color: Colors.orange,
+                                Icon(Icons.local_fire_department),
+                                Text(
+                                  '1119/1200',
+                                  style: GoogleFonts.openSans(
+                                      fontSize: 22,
+                                      color: tertiaryColor,
+                                      fontWeight: FontWeight.w700),
                                 ),
-                                RichText(
-                                  text: TextSpan(
-                                      text: '1119/1200',
-                                      style: GoogleFonts.openSans(
-                                          fontSize: 19,
-                                          color: tertiaryColor,
-                                          fontWeight: FontWeight.w700),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: ' Cal',
-                                          style: GoogleFonts.openSans(
-                                              fontSize: 16,
-                                              color: tertiaryColor,
-                                              fontWeight: FontWeight.w700),
-                                        )
-                                      ]),
-                                ),
+                                Text('cal')
                               ],
                             ),
                             SizedBox(
@@ -108,25 +101,15 @@ class Summary_Nutrition extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                Icon(Icons.water_drop, color: Colors.blue),
-                                RichText(
-                                  text: TextSpan(
-                                      text: '1.85/2.13',
-                                      style: GoogleFonts.openSans(
-                                          fontSize: 19,
-                                          color: tertiaryColor,
-                                          fontWeight: FontWeight.w700),
-                                      children: <TextSpan>[
-                                        TextSpan(
-                                          text: ' Liters',
-                                          style: GoogleFonts.openSans(
-                                              fontSize: 16,
-                                              color: tertiaryColor,
-                                              fontWeight: FontWeight.w700),
-                                        )
-                                      ]),
+                                Icon(Icons.water_drop),
+                                Text(
+                                  '1.85/2.13',
+                                  style: GoogleFonts.openSans(
+                                      fontSize: 22,
+                                      color: tertiaryColor,
+                                      fontWeight: FontWeight.w700),
                                 ),
-                                
+                                Text('Liters')
                               ],
                             )
                           ],
@@ -145,7 +128,8 @@ class Summary_Nutrition extends StatelessWidget {
                                 percent: 0.6,
                                 center: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.center,
                                   children: [
                                     SizedBox(
                                       height: 30,
@@ -207,7 +191,7 @@ class Summary_Nutrition extends StatelessWidget {
                                 barRadius: const Radius.circular(15),
                                 progressColor: Colors.purple),
                             Text(
-                              '15/50 Grams',
+                              '15/25 Grams',
                               style: GoogleFonts.openSans(
                                   fontSize: 12,
                                   color: tertiaryColor,
@@ -231,7 +215,7 @@ class Summary_Nutrition extends StatelessWidget {
                                 barRadius: const Radius.circular(15),
                                 progressColor: Colors.lightBlue),
                             Text(
-                              '15/300 Grams',
+                              '15/25 Grams',
                               style: GoogleFonts.openSans(
                                   fontSize: 12,
                                   color: tertiaryColor,
@@ -256,7 +240,7 @@ class Summary_Nutrition extends StatelessWidget {
                               progressColor: Colors.orange,
                             ),
                             Text(
-                              '15/66 Grams',
+                              '15/25 Grams',
                               style: GoogleFonts.openSans(
                                   fontSize: 12,
                                   color: tertiaryColor,
@@ -273,6 +257,6 @@ class Summary_Nutrition extends StatelessWidget {
           )
         ],
       ),
-    );
+    ]);
   }
 }

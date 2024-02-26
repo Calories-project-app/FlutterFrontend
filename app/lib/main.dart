@@ -1,6 +1,10 @@
 
+import 'package:app/pages/add_water.dart';
 import 'package:app/pages/home/home.dart';
 import 'package:app/pages/login/landing_page.dart';
+import 'package:app/pages/login/login.dart';
+import 'package:app/pages/login/register.dart';
+import 'package:app/pages/statistics.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primaryColor: primaryColor),
-      home: const LandingPage(),
+      home: const Login(),
     );
   }
 }

@@ -1,33 +1,32 @@
 import 'dart:io';
 
 import 'package:app/%E0%B8%B5utils/statics.dart';
+import 'package:app/pages/image/previewImage.dart';
+import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'package:app/utils/statics.dart';
 import 'package:app/pages/home/home.dart';
 import 'package:app/pages/image/image_picker.dart';
+import 'package:app/pages/image/image_screen.dart';
 import 'package:app/pages/leaderboard.dart';
 import 'package:app/pages/profile.dart';
 import 'package:app/pages/statistics.dart';
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class Navbar extends StatefulWidget {
-  const Navbar({super.key});
+  const Navbar({Key? key}) : super(key: key);
 
   @override
   _NavbarState createState() => _NavbarState();
 }
 
 class _NavbarState extends State<Navbar> {
-  File? image;
-
-  pickImage(ImageSource source) {
-    AppImagePicker(source: source).pick(onPick: (File? image) {
-      setState(() {
-        this.image = image;
-      });
-    });
-  }
-
   int _currentIndex = 0;
+
+  File? image;
+  final _picker = ImagePicker();
+  bool showSpinner = false;
 
   final List<Widget> _pages = [
     const Home(),
@@ -37,11 +36,35 @@ class _NavbarState extends State<Navbar> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  Future getImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.camera, imageQuality: 80);
+
+    if (pickedFile != null) {
+      image = File(pickedFile.path);
+      setState(() {});
+    } else {
+      print("No Image Selected");
+    }
+
+    return image; 
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
+        color: primaryColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
@@ -82,14 +105,22 @@ class _NavbarState extends State<Navbar> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          
-          pickImage(ImageSource.camera); 
+        onPressed: () async {
+          final selectedImage = await getImage();
+          if(selectedImage != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PreviewImagePage( imagePath: selectedImage,)),
+            );
+          }
         },
         backgroundColor: primaryColor,
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.camera_alt),
+        shape: CircleBorder(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      
+
     );
   }
 }
@@ -98,7 +129,8 @@ class PageWidget extends StatelessWidget {
   final Color color;
   final String title;
 
-  const PageWidget({super.key, required this.color, required this.title});
+  const PageWidget({Key? key, required this.color, required this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
