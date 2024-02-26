@@ -1,3 +1,13 @@
+# General
+.DS_Store
+*.swp
+*.lock
+*.bak
+*.tmp
+*.swp
+*.swo
+local.properties
+
 # Miscellaneous
 *.class
 *.log
@@ -8,6 +18,7 @@
 .buildlog/
 .history
 .svn/
+#.vscode/
 migrate_working_dir/
 
 # IntelliJ related
@@ -15,13 +26,7 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Flutter/Dart/Pub related
+# Dart/Flutter
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
@@ -32,13 +37,61 @@ migrate_working_dir/
 .pub/
 /build/
 
+# Xcode (for iOS/macOS)
+**/ios/.symlinks/
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/App.framework
+**/ios/Flutter/FlutterPluginRegistrant/
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/GeneratedPluginRegistrant.*
+**/ios/Flutter/Debug.xcconfig
+**/ios/Flutter/Release.xcconfig
+**/ios/Pods/
+**/.generated/
+**/ios/Runner.xcworkspace/
+**/ios/.generated_plugin_registrant.dart
+**/macos/Flutter/ephemeral/
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/Generated.xcconfig
+ios/Frameworks/
+ios/Pods/
+ios/Runner.xcworkspace
+macos/Pods/
+
+# Android (just in case)
+**/android/.gradle
+**/android/.idea
+**/android/.cxx
+**/android/local.properties
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/key.properties
+**/android/gradle/wrapper/gradle-wrapper.jar
+.gradle/
+**/android/app/debug.keystore
+**/android/app/build/
+/android/app/debug
+/android/app/profile
+/android/app/release
+# IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VS Code
+.vscode/
+
+# Temporary files
+tmp/
+temp/
 # Symbolication related
 app.*.symbols
 
 # Obfuscation related
 app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
