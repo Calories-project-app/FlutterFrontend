@@ -1,14 +1,28 @@
+import 'package:app/%E0%B8%B5utils/shared_preference/temp_auth_token.dart';
 import 'package:app/%E0%B8%B5utils/statics.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/intl.dart' as intl;
 
 class Summary_Nutrition extends StatelessWidget {
-  const Summary_Nutrition({super.key});
+  final Map<String, dynamic>? statistics;
+  final Map<String, dynamic>? userInfo;
+  const Summary_Nutrition({Key? key, this.userInfo, this.statistics})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var now = DateTime.now();
+    var formatter = intl.DateFormat('d MMM yyyy');
+    final caloriesLeft =
+        userInfo!['totalDailyCalories'] - statistics!['totalCalories'];
+    final waterlitre = userInfo!['waterConsumingRate'] / 1000;
+    String formattedDate = formatter.format(now);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
@@ -19,7 +33,7 @@ class Summary_Nutrition extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '19 September 2023',
+                    formattedDate,
                     style: TextStyle(
                       color: secondaryColor,
                       fontSize: 18,
@@ -77,7 +91,8 @@ class Summary_Nutrition extends StatelessWidget {
                                 ),
                                 RichText(
                                   text: TextSpan(
-                                      text: '1119/1200',
+                                      text:
+                                          '${statistics!['totalCalories'].toString()}/${userInfo!['totalDailyCalories'].toString()}',
                                       style: GoogleFonts.openSans(
                                           fontSize: 19,
                                           color: tertiaryColor,
@@ -111,7 +126,8 @@ class Summary_Nutrition extends StatelessWidget {
                                 Icon(Icons.water_drop, color: Colors.blue),
                                 RichText(
                                   text: TextSpan(
-                                      text: '1.85/2.13',
+                                      text:
+                                          '${statistics!['totalLitre'].toString()}/$waterlitre',
                                       style: GoogleFonts.openSans(
                                           fontSize: 19,
                                           color: tertiaryColor,
@@ -126,7 +142,6 @@ class Summary_Nutrition extends StatelessWidget {
                                         )
                                       ]),
                                 ),
-                                
                               ],
                             )
                           ],
@@ -151,7 +166,7 @@ class Summary_Nutrition extends StatelessWidget {
                                       height: 30,
                                     ),
                                     Text(
-                                      '867',
+                                      caloriesLeft.toString(),
                                       style: GoogleFonts.openSans(
                                           fontSize: 24,
                                           color: primaryColor,
