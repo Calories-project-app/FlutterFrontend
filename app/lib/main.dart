@@ -1,4 +1,3 @@
-
 import 'package:app/pages/add_water.dart';
 import 'package:app/pages/home/home.dart';
 import 'package:app/pages/login/landing_page.dart';
@@ -14,12 +13,12 @@ void main() {
 class MyApp extends StatelessWidget {
   static const primaryColor = Color(0x00ffffff);
 
-  const MyApp({super.key}); 
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primaryColor: primaryColor),
-      home: const Login(),
+      home: const LandingPage(),
     );
   }
 }

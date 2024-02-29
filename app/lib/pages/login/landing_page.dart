@@ -53,7 +53,7 @@ class _LandingPageState extends State<LandingPage> {
                   onPressed: () {
                     print('Go to Next');
                     MaterialPageRoute materialPageRoute = MaterialPageRoute(
-                        builder: (BuildContext context) => Login());
+                        builder: (BuildContext context) => Register());
                     Navigator.of(context).push(materialPageRoute);
                   },
                   child: Text(
@@ -69,22 +69,18 @@ class _LandingPageState extends State<LandingPage> {
               height: 10,
             ),
             GestureDetector(
-              child:  
-              Text(
-              'Have an account?',
-              style: GoogleFonts.openSans(
-                fontSize: 18,
-                color: Color(0xFF4E3D3D),
+              child: Text(
+                'Have an account?',
+                style: GoogleFonts.openSans(
+                  fontSize: 18,
+                  color: Color(0xFF4E3D3D),
+                ),
               ),
-             ),
-             onTap: () {
-               Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        Register())); 
-             },
+              onTap: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (BuildContext context) => Login()));
+              },
             )
-           
           ],
         ),
       )),
