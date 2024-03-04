@@ -1,4 +1,4 @@
-import 'package:app/pages/login/forget_password.dart';
+import 'package:app/pages/login/reg_pages/forget_password.dart';
 import 'package:app/pages/login/reg_pages/email_valification.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -123,11 +123,36 @@ class _RegisterState extends State<Register> {
                                       borderRadius: BorderRadius.circular(30))),
                               onPressed: () {
                                 print('Go to Next');
-                                MaterialPageRoute materialPageRoute =
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            EmailValification());
-                                Navigator.of(context).push(materialPageRoute);
+                                print(_password);
+                                print(_confirmPassword);
+                                if (_password.text != _confirmPassword.text) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('Close')),
+                                      ],
+                                      title: const Text('Password Not Match'),
+                                      contentPadding:
+                                          const EdgeInsets.all(20.0),
+                                      content: const Text(
+                                          'You Password is not match {}'),
+                                    ),
+                                  );
+                                } else {
+                                  MaterialPageRoute materialPageRoute =
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              EmailValification(
+                                                email: _email.text,
+                                                password: _password.text,
+                                              ));
+                                  Navigator.of(context).push(materialPageRoute);
+                                }
                               },
                               child: Text(
                                 'Register',
@@ -150,7 +175,7 @@ class _RegisterState extends State<Register> {
                             Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        ForgetPassword())); 
+                                        ForgetPassword()));
                           },
                         ),
                       )

@@ -1,10 +1,19 @@
 import 'package:app/%E0%B8%B5utils/statics.dart';
+import 'package:app/pages/login/reg_pages/gender_resgister.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BirthdayRegister extends StatefulWidget {
-  const BirthdayRegister({super.key});
+  final String email;
+  final String password;
+  final String name;
+
+  BirthdayRegister(
+      {super.key,
+      required this.email,
+      required this.password,
+      required this.name});
 
   @override
   State<BirthdayRegister> createState() => _BirthdayRegisterState();
@@ -73,32 +82,55 @@ class _BirthdayRegisterState extends State<BirthdayRegister> {
               ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: quaternaryColor,
-                    minimumSize: Size(300, 80) 
-                  ),
+                      backgroundColor: quaternaryColor,
+                      minimumSize: Size(300, 80)),
                   onPressed: () {
                     showCupertinoModalPopup(
                         context: context,
                         builder: (context) {
                           return Container(
-                            height: MediaQuery.of(context).size.height *0.3,
+                            height: MediaQuery.of(context).size.height * 0.3,
                             color: quaternaryColor,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                TextButton(onPressed: (){
-                                  Navigator.pop(context);
-                                }, 
-                                child: Text('Done'), 
-                                ), 
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text('Done'),
+                                ),
                                 Expanded(child: buildDatePicker())
                               ],
                             ),
                           );
                         });
-                      
                   },
-                  child: Text('Enter Date'))
+                  child: Text(
+                    '${dateTime.day} - ${dateTime.month} - ${dateTime.year}',
+                    style: GoogleFonts.openSans(fontSize: 22),
+                  )),
+              SizedBox(
+                height: 100,
+              ),
+              GestureDetector(
+                child: Center(
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                        color: primaryColor, shape: BoxShape.circle),
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                onTap: () {
+                  MaterialPageRoute materialPageRoute = MaterialPageRoute(
+                      builder: (BuildContext context) => GenderRegister(email: widget.email, password: widget.password, name: widget.name, birthDate: '${dateTime.year}-${dateTime.month}-${dateTime.day}', ));
+                  Navigator.of(context).push(materialPageRoute);
+                },
+              ),
             ],
           ),
         ),
@@ -111,6 +143,4 @@ class _BirthdayRegisterState extends State<BirthdayRegister> {
       mode: CupertinoDatePickerMode.date,
       onDateTimeChanged: (dateTime) =>
           setState(() => this.dateTime = dateTime));
-
-
 }

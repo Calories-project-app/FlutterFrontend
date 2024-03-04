@@ -7,7 +7,10 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EmailValification extends StatefulWidget {
-  const EmailValification({super.key});
+  final String email;
+  final String password;
+
+  EmailValification({super.key,  required this.email, required this.password});
 
   @override
   State<EmailValification> createState() => _EmailValificationState();
@@ -271,7 +274,7 @@ class _EmailValificationState extends State<EmailValification> {
             MaterialPageRoute materialPageRoute =
                                     MaterialPageRoute(
                                         builder: (BuildContext context) =>
-                                            NameRegister());
+                                            NameRegister(email: widget.email , password: widget.password ,));
               Navigator.of(context).push(materialPageRoute);
             },
             ),

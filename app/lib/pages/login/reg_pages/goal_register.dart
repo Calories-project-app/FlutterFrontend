@@ -4,7 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GoalRegister extends StatefulWidget {
-  const GoalRegister({super.key});
+  final String email;
+  final String password;
+  final String name;
+
+  GoalRegister(
+      {super.key,
+      required this.email,
+      required this.password,
+      required this.name});
 
   @override
   State<GoalRegister> createState() => _GoalRegisterState();
@@ -38,8 +46,8 @@ class _GoalRegisterState extends State<GoalRegister> {
         ),
       ),
       body: SafeArea(
-        child: Center(
-          child: Column(
+          child: Center(
+        child: Column(
           children: [
             Text(
               'What is your',
@@ -55,59 +63,66 @@ class _GoalRegisterState extends State<GoalRegister> {
                   color: primaryColor,
                   fontWeight: FontWeight.w500),
             ),
-            SizedBox(height: 50,),
+            SizedBox(
+              height: 50,
+            ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(300, 80), backgroundColor: quaternaryColor
-              ),
+                  minimumSize: Size(300, 80), backgroundColor: quaternaryColor),
               onPressed: () {
                 MaterialPageRoute materialPageRoute = MaterialPageRoute(
-                    builder: (BuildContext context) => BirthdayRegister());
+                    builder: (BuildContext context) => BirthdayRegister(email: widget.email, password: widget.password, name: widget.name,));
                 Navigator.of(context).push(materialPageRoute);
-              }, child: Text(
-              'Loss Weight',
-              style: GoogleFonts.openSans(
-                  fontSize: 22,
-                  color: tertiaryColor,
-                  fontWeight: FontWeight.w700),
-            ),),
-            SizedBox(height: 50,),
+              },
+              child: Text(
+                'Loss Weight',
+                style: GoogleFonts.openSans(
+                    fontSize: 22,
+                    color: tertiaryColor,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(300, 80), backgroundColor: quaternaryColor
-              ),
+                  minimumSize: Size(300, 80), backgroundColor: quaternaryColor),
               onPressed: () {
                 MaterialPageRoute materialPageRoute = MaterialPageRoute(
-                    builder: (BuildContext context) => BirthdayRegister());
+                    builder: (BuildContext context) => BirthdayRegister(email: widget.email, password: widget.password, name: widget.name,));
                 Navigator.of(context).push(materialPageRoute);
-              }, child: Text(
-              'Remain Weight',
-              style: GoogleFonts.openSans(
-                  fontSize: 22,
-                  color: tertiaryColor,
-                  fontWeight: FontWeight.w700),
-            ),),
-            SizedBox(height: 50,),
+              },
+              child: Text(
+                'Remain Weight',
+                style: GoogleFonts.openSans(
+                    fontSize: 22,
+                    color: tertiaryColor,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(300, 80), backgroundColor: quaternaryColor
-              ),
+                  minimumSize: Size(300, 80), backgroundColor: quaternaryColor),
               onPressed: () {
                 MaterialPageRoute materialPageRoute = MaterialPageRoute(
-                    builder: (BuildContext context) => BirthdayRegister());
+                    builder: (BuildContext context) => BirthdayRegister(email: widget.email, password: widget.password, name: widget.name,));
                 Navigator.of(context).push(materialPageRoute);
-              }, child: Text(
-              'Gain Weight',
-              style: GoogleFonts.openSans(
-                  fontSize: 22,
-                  color: tertiaryColor,
-                  fontWeight: FontWeight.w700),
-            ),)
+              },
+              child: Text(
+                'Gain Weight',
+                style: GoogleFonts.openSans(
+                    fontSize: 22,
+                    color: tertiaryColor,
+                    fontWeight: FontWeight.w700),
+              ),
+            )
           ],
         ),
-        )
-        
-      ),
+      )),
     );
   }
 }

@@ -1,5 +1,6 @@
+import 'package:app/main_screen.dart';
 import 'package:app/pages/home/home.dart';
-import 'package:app/pages/login/forget_password.dart';
+import 'package:app/pages/login/reg_pages/forget_password.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -36,7 +37,7 @@ class _LoginState extends State<Login> {
       final String userInfo = json.encode(data['user']);
       await prefs.setString('userInfo', userInfo);
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const Home()));
+          MaterialPageRoute(builder: (context) => const MainScreen()));
     } else {
       // If the login failed, display an alert dialog or a snackbar
       ScaffoldMessenger.of(context).showSnackBar(

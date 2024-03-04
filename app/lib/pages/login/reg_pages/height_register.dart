@@ -1,23 +1,34 @@
 import 'package:app/%E0%B8%B5utils/statics.dart';
-import 'package:app/pages/login/reg_pages/goal_register.dart';
-import 'package:app/pages/login/reg_pages/input_field.dart';
+import 'package:app/pages/login/reg_pages/number_field.dart';
+import 'package:app/pages/login/reg_pages/current_weight_register.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class NameRegister extends StatefulWidget {
-  final String  email;
-  final String  password;
+class HeightRegiser extends StatefulWidget {
+  final String email;
+  final String password;
+  final String name;
+  final String birthDate;
+  final String gender;
 
-  NameRegister({super.key , required this.email , required this.password});
+  HeightRegiser(
+      {super.key,
+      required this.email,
+      required this.password,
+      required this.name,
+      required this.birthDate,
+      required this.gender});
 
   @override
-  State<NameRegister> createState() => _NameRegisterState();
+  State<HeightRegiser> createState() => _HeightRegiserState();
 }
 
-class _NameRegisterState extends State<NameRegister> {
-  final _nameController = TextEditingController();
+class _HeightRegiserState extends State<HeightRegiser> {
+  final _heigthController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
@@ -43,42 +54,38 @@ class _NameRegisterState extends State<NameRegister> {
         ),
       ),
       body: SafeArea(
-          child: Container(
-        margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: Center(
         child: Column(
           children: [
-            SizedBox(
-              height: 100,
+            Text(
+              'What is your',
+              style: GoogleFonts.openSans(
+                  fontSize: 36,
+                  color: tertiaryColor,
+                  fontWeight: FontWeight.w700),
             ),
-            Center(
-              child: Text(
-                'What is your',
-                style: GoogleFonts.openSans(
-                    fontSize: 36,
-                    color: tertiaryColor,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-            Center(
-              child: Text(
-                'name?',
-                style: GoogleFonts.openSans(
-                    fontSize: 36,
-                    color: primaryColor,
-                    fontWeight: FontWeight.w700),
-              ),
+            Text(
+              'Height?',
+              style: GoogleFonts.openSans(
+                  fontSize: 36,
+                  color: primaryColor,
+                  fontWeight: FontWeight.w500),
             ),
             SizedBox(
               height: 50,
             ),
-            InputField(
-                label: '',
-                placeholder: 'Name',
-                error: '',
-                isNextable: true,
-                isPassword: false,
-                controller: _nameController),
-            SizedBox(height: 100,),
+            Container(
+              width: size.width * 0.8,
+              child: NumberInputField(
+                  label: '',
+                  placeholder: 'Enter Height',
+                  error: '',
+                  isNextable: false,
+                  controller: _heigthController),
+            ),
+            SizedBox(
+              height: 100,
+            ),
             GestureDetector(
               child: Center(
                 child: Container(
@@ -93,11 +100,10 @@ class _NameRegisterState extends State<NameRegister> {
               ),
               onTap: () {
                 MaterialPageRoute materialPageRoute = MaterialPageRoute(
-                    builder: (BuildContext context) => GoalRegister( email: widget.email, password: widget.password, name: _nameController.text, ));
+                    builder: (BuildContext context) => CurrentWeightRegister(email: widget.email, password: widget.password, name: widget.name, birthDate: widget.birthDate ,gender: widget.gender, height : _heigthController.text));
                 Navigator.of(context).push(materialPageRoute);
               },
             ),
-            
           ],
         ),
       )),
