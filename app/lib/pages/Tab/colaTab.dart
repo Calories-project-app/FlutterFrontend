@@ -1,6 +1,6 @@
 import 'package:app/%E0%B8%B5utils/statics.dart';
 import 'package:app/pages/confirmWater.dart';
-import 'package:app/pages/login/reg_pages/forget_password.dart';
+import 'package:app/pages/login/forget_password.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
