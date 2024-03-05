@@ -1,4 +1,6 @@
 import 'package:app/%E0%B8%B5utils/statics.dart';
+import 'package:app/pages/leaderborad/topCal.dart';
+import 'package:app/pages/leaderborad/topWater.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,12 +35,13 @@ class _LeaderboardState extends State<Leaderboard>
     final size = MediaQuery.of(context).size;
     return Scaffold(
         extendBodyBehindAppBar: true,
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
         body: SafeArea(
-            top: true,
+            
             child: Stack(children: [
               Align(
                 alignment: const AlignmentDirectional(0, -1.75),
@@ -143,10 +146,12 @@ class _LeaderboardState extends State<Leaderboard>
                                       width: double
                                           .infinity, // Set width to cover the entire tab
                                       alignment: Alignment.center,
-                                      child: Text('Calories' , style: GoogleFonts.openSans(
-                                        fontSize : 20, 
-                                        fontWeight : FontWeight.w700
-                                      ),),
+                                      child: Text(
+                                        'Calories',
+                                        style: GoogleFonts.openSans(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w700),
+                                      ),
                                     ),
                                   ),
                                   Tab(
@@ -154,10 +159,12 @@ class _LeaderboardState extends State<Leaderboard>
                                       width: double
                                           .infinity, // Set width to cover the entire tab
                                       alignment: Alignment.center,
-                                      child: Text('Water' , style: GoogleFonts.openSans(
-                                        fontSize : 20, 
-                                        fontWeight : FontWeight.w700
-                                      ),),
+                                      child: Text(
+                                        'Water',
+                                        style: GoogleFonts.openSans(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w700),
+                                      ),
                                     ),
                                   )
                                 ],
@@ -173,23 +180,71 @@ class _LeaderboardState extends State<Leaderboard>
               Align(
                 alignment: AlignmentDirectional(0, 120.85),
                 child: Container(
-                  width: size.width,
-                  height: size.height * 0.8225,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(0),
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40),
+                    width: size.width,
+                    height: size.height * 0.8215,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(0),
+                        bottomRight: Radius.circular(0),
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: size.height * 0.1,
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: TabBarView(
+                              controller: tabController,
+                              children: [
+                                TopCal(),
+                                TopWater(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+              ),
+              /*Align(
+                alignment: AlignmentDirectional(0, -0.45),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                  Container(
+                    width: 79,
+                    height: 79,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black,
                     ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text('data')],
+                  Container(
+                    width: 131,
+                    height: 131,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              )
+                  Container(
+                    width: 79,
+                    height: 79,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black,
+                    ),
+                  ),
+                ]),
+              )*/
             ])));
   }
 }

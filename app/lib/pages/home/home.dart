@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/%E0%B8%B5utils/sharedPerference.dart';
 import 'package:app/%E0%B8%B5utils/statics.dart';
 import 'package:app/pages/home/header.dart';
 import 'package:app/pages/home/sumary_water.dart';
@@ -17,27 +18,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Future<Map<String, dynamic>?> getUserInfo() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? info = prefs.getString('userInfo');
-    if (info != null) {
-      return json.decode(info);
-    }
-    return null;
-  }
-
-  Future<String?> getToken() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? token = prefs.getString('token');
-    if (token != null) {
-      return token;
-    }
-    return null;
-  }
-
+  
+  
   Future<Map<String, dynamic>?> loadUserInfoAndStatistics() async {
-    final userInfo = await getUserInfo();
-    final token = await getToken();
+    final userInfo = await Shared.getUserInfo();
+    final token = await Shared.getToken();
     if (userInfo != null && token != null) {
       final responseData = await getStatistics(token, userInfo);
       return {
@@ -53,8 +38,7 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  Future<Map<String, dynamic>?> getStatistics(
-      String token, Map<String, dynamic> userInfo) async {
+  Future<Map<String, dynamic>?> getStatistics( String token, Map<String, dynamic> userInfo) async {
     String userId = userInfo['_id'];
     DateTime now = DateTime.now();
     try {
