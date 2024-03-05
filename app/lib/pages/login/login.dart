@@ -1,6 +1,6 @@
 import 'package:app/main_screen.dart';
 import 'package:app/pages/home/home.dart';
-import 'package:app/pages/login/reg_pages/forget_password.dart';
+import 'package:app/pages/login/forget_password.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -16,6 +16,9 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController _email = new TextEditingController();
   TextEditingController _password = new TextEditingController();
+
+  var _isObscured;
+
   Future<void> _login() async {
     final response = await http.post(
       Uri.parse('https://foodcal-app.up.railway.app/auth/login'),
@@ -46,6 +49,12 @@ class _LoginState extends State<Login> {
         ),
       );
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _isObscured = true;
   }
 
   @override
@@ -113,6 +122,7 @@ class _LoginState extends State<Login> {
                               controller: _email,
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
+                                hintText: 'Email',
                               ),
                             ),
                           ),
@@ -127,10 +137,21 @@ class _LoginState extends State<Login> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(10, 0, 10, 80),
                             child: TextField(
+                              obscureText: _isObscured,
                               controller: _password,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                              ),
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: 'Password',
+                                  suffixIcon: IconButton(
+                                      onPressed: () {
+                                        print(_isObscured);
+                                        setState(() {
+                                          _isObscured =! _isObscured;
+                                        });
+                                      },
+                                      icon: _isObscured
+                                          ? const Icon(Icons.visibility)
+                                          : const Icon(Icons.visibility_off))),
                             ),
                           ),
                           Center(
@@ -141,7 +162,8 @@ class _LoginState extends State<Login> {
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: Color(0xFFF39200),
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(30))),
+                                          borderRadius:
+                                              BorderRadius.circular(30))),
                                   onPressed: _login,
                                   child: Text(
                                     'Login',
@@ -161,10 +183,9 @@ class _LoginState extends State<Login> {
                                       color: Color(0xFF594949),
                                       fontWeight: FontWeight.w500)),
                               onTap: () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            ForgetPassword()));
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ForgetPassword()));
                               },
                             ),
                           )

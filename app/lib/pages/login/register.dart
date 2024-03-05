@@ -1,4 +1,4 @@
-import 'package:app/pages/login/reg_pages/forget_password.dart';
+import 'package:app/pages/login/forget_password.dart';
 import 'package:app/pages/login/reg_pages/email_valification.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +14,13 @@ class _RegisterState extends State<Register> {
   TextEditingController _email = new TextEditingController();
   TextEditingController _password = new TextEditingController();
   TextEditingController _confirmPassword = new TextEditingController();
+  var _isObscured;
+
+  @override
+  void initState() {
+    _isObscured = true;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,10 +82,11 @@ class _RegisterState extends State<Register> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                           child: TextField(
+                            
                             controller: _email,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                            ),
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                ),
                           ),
                         ),
                         Padding(
@@ -92,10 +100,20 @@ class _RegisterState extends State<Register> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                           child: TextField(
+                            obscureText: _isObscured,
                             controller: _password,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                            ),
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      print(_isObscured);
+                                      setState(() {
+                                        _isObscured = !_isObscured;
+                                      });
+                                    },
+                                    icon: _isObscured
+                                        ? const Icon(Icons.visibility)
+                                        : const Icon(Icons.visibility_off))),
                           ),
                         ),
                         Padding(
@@ -109,10 +127,20 @@ class _RegisterState extends State<Register> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
                           child: TextField(
+                            obscureText: _isObscured,
                             controller: _confirmPassword,
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                            ),
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      print(_isObscured);
+                                      setState(() {
+                                        _isObscured = !_isObscured;
+                                      });
+                                    },
+                                    icon: _isObscured
+                                        ? const Icon(Icons.visibility)
+                                        : const Icon(Icons.visibility_off))),
                           ),
                         ),
                         Center(
@@ -123,7 +151,8 @@ class _RegisterState extends State<Register> {
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Color(0xFFF39200),
                                     shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30))),
+                                        borderRadius:
+                                            BorderRadius.circular(30))),
                                 onPressed: () {
                                   print('Go to Next');
                                   print(_password);
@@ -154,7 +183,8 @@ class _RegisterState extends State<Register> {
                                                   email: _email.text,
                                                   password: _password.text,
                                                 ));
-                                    Navigator.of(context).push(materialPageRoute);
+                                    Navigator.of(context)
+                                        .push(materialPageRoute);
                                   }
                                 },
                                 child: Text(
