@@ -18,8 +18,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  
-  
   Future<Map<String, dynamic>?> loadUserInfoAndStatistics() async {
     final userInfo = await Shared.getUserInfo();
     final token = await Shared.getToken();
@@ -38,7 +36,8 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  Future<Map<String, dynamic>?> getStatistics( String token, Map<String, dynamic> userInfo) async {
+  Future<Map<String, dynamic>?> getStatistics(
+      String token, Map<String, dynamic> userInfo) async {
     String userId = userInfo['_id'];
     DateTime now = DateTime.now();
     try {
@@ -51,7 +50,7 @@ class _HomeState extends State<Home> {
         },
         body: jsonEncode(<String, String>{
           'userId': userId,
-          'date': now.toIso8601String(),
+          'date': "2024-03-06",
         }),
       );
       if (response.statusCode == 200) {
