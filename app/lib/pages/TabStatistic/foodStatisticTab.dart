@@ -41,8 +41,7 @@ class _FoodStatisticTabState extends State<FoodStatisticTab> {
     String? _userId = await Shared.getUserId();
     String? userId = _userId;
     String? _token = await Shared.getToken();
-    String date =
-        DateFormat('yyyy-MM-dd').format(_selectedDate); // Use selectedDate
+    String date = DateFormat('yyyy-MM-dd').format(_selectedDate); // Use selectedDate
     String? token = _token;
     print('This is Select from function ${_selectedDate}');
     try {

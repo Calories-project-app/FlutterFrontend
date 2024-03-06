@@ -26,6 +26,9 @@ class Summary_Nutrition extends StatelessWidget {
     print(percent);
     final caloriesLeft =
         userInfo!['totalDailyCalories'] - statistics!['totalCalories'];
+    final calPercent =
+        ((statistics!['totalCalories'] / userInfo!['totalDailyCalories']) *
+            100);
     final waterlitre = userInfo!['waterConsumingRate'] / 1000;
     String formattedDate = formatter.format(now);
     return Container(
