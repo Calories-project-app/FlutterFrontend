@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart' as intl;
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -18,13 +19,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  
-  
   Future<Map<String, dynamic>?> loadUserInfoAndStatistics() async {
     final userInfo = await Shared.getUserInfo();
     final token = await Shared.getToken();
     if (userInfo != null && token != null) {
-      final responseData = await getStatistics(token, userInfo);
+      final responseData = await getStatistics(token, userInfo,now);
       return {
         'userInfo': userInfo,
         'statistics': responseData,
@@ -38,9 +37,15 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  Future<Map<String, dynamic>?> getStatistics( String token, Map<String, dynamic> userInfo) async {
+
+  String now = intl.DateFormat('yyyy-MM-dd').format(DateTime.now());
+
+  Future<Map<String, dynamic>?> getStatistics(
+      String token, Map<String, dynamic> userInfo ,String now) async {
     String userId = userInfo['_id'];
-    DateTime now = DateTime.now();
+    
+  
+
     try {
       final response = await http.post(
         Uri.parse(
@@ -51,11 +56,12 @@ class _HomeState extends State<Home> {
         },
         body: jsonEncode(<String, String>{
           'userId': userId,
-          'date': now.toIso8601String(),
+          'date': now,
         }),
       );
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
+        print(responseData.toString());
         return responseData;
       } else {
         return null;
@@ -95,6 +101,8 @@ class _HomeState extends State<Home> {
                       final userInfo = snapshot.data?['userInfo'];
                       final statistics =
                           snapshot.data?['statistics']; // Now locally available
+                      print('dataStatistic');
+                      print(snapshot.data?['statistics']);
                       String userName = userInfo?["email"] ?? "User";
                       return Column(
                         children: [

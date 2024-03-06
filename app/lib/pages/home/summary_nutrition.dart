@@ -21,6 +21,9 @@ class Summary_Nutrition extends StatelessWidget {
     var formatter = intl.DateFormat('d MMM yyyy');
     final caloriesLeft =
         userInfo!['totalDailyCalories'] - statistics!['totalCalories'];
+    final calPercent =
+        ((statistics!['totalCalories'] / userInfo!['totalDailyCalories']) *
+            100);
     final waterlitre = userInfo!['waterConsumingRate'] / 1000;
     String formattedDate = formatter.format(now);
     return Container(
@@ -157,7 +160,7 @@ class Summary_Nutrition extends StatelessWidget {
                                 lineWidth: 5,
                                 backgroundColor: Colors.grey,
                                 progressColor: Colors.orange,
-                                percent: 0.6,
+                                percent: calPercent / 100,
                                 center: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -266,7 +269,7 @@ class Summary_Nutrition extends StatelessWidget {
                             LinearPercentIndicator(
                               width: 100,
                               lineHeight: 5.0,
-                              percent: 0.8,
+                              percent: 0.6,
                               barRadius: const Radius.circular(15),
                               progressColor: Colors.orange,
                             ),

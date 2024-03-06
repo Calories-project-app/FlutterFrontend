@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:app/%E0%B8%B5utils/statics.dart';
 import 'package:app/pages/image/predict.dart';
-import 'package:app/pages/image/testImage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart' show rootBundle;
 
 class PreviewImagePage extends StatelessWidget {
   final File imagePath;
@@ -58,31 +57,72 @@ class PreviewImagePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Preview Image'),
+        title: Text('Preview Image' , style: GoogleFonts.openSans(),),
+        backgroundColor: primaryColor,
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 200,
+              height: size.height * 0.7,
+              width: size.width,
               child: Image.file(imagePath),
             ),
-            SizedBox(height: 16.0),
             ElevatedButton(
+              
+              
               onPressed: () async {
-                Map<String, dynamic> response = await uploadImage(imagePath.path); // Pass imagePath.path
+                Map<String, dynamic> response =
+                    await uploadImage(imagePath.path); // Pass imagePath.path
                 print(imagePath);
                 print(response);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
+
+                if (response['calories'] == 0 &&
+                    response['carb_sum'] == 0 &&
+                    response['fat_sum'] == 0 &&
+                    response['protein_sum'] == 0 &&
+                    response['results'] != null &&
+                    response['results'].isEmpty) {
+          
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Confirmation'),
+                        content: Text(
+                            'This Image is can not use for predict'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('Yes'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
                       builder: (context) => PredictionResultsPage(
-                          response: response, image: imagePath, /*imagePath*/ )),
-                );
+                        response: response,
+                        image: imagePath,
+                      ),
+                    ),
+                  );
+                }
               },
               child: Text('Upload'),
             )
