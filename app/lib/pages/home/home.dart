@@ -108,7 +108,8 @@ class _HomeState extends State<Home> {
                           Summary_Nutrition(
                               userInfo: userInfo,
                               statistics: statistics), // Pass statistics here
-                          SummaryWater(),
+                          SummaryWater(
+                              userInfo: userInfo, statistics: statistics),
                         ],
                       );
                     } else {

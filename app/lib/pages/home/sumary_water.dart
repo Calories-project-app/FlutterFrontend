@@ -5,7 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class SummaryWater extends StatefulWidget {
-  const SummaryWater({super.key});
+  final Map<String, dynamic>? statistics;
+  final Map<String, dynamic>? userInfo;
+  const SummaryWater({Key? key, this.userInfo, this.statistics})
+      : super(key: key);
 
   @override
   State<SummaryWater> createState() => _SummaryWaterState();
@@ -14,6 +17,28 @@ class SummaryWater extends StatefulWidget {
 class _SummaryWaterState extends State<SummaryWater> {
   @override
   Widget build(BuildContext context) {
+    final double percent = widget.statistics != null
+        ? (widget.statistics!['totalLitre'] / 1000) /
+            widget.userInfo!['waterConsumingRate']
+        : 0;
+    final String totalLitre = widget.statistics != null
+        ? (widget.statistics!['totalLitre'] / 1000).toString()
+        : "0";
+    final String waterConsumingRate = widget.userInfo != null
+        ? (widget.userInfo!['waterConsumingRate'] / 1000).toString()
+        : "0";
+    final String totalCaffeine = widget.statistics != null
+        ? (widget.statistics!['totalCaffeine'] / 1000).toString()
+        : "0";
+    final double percentCaffeine = widget.statistics != null
+        ? (widget.statistics!['totalCaffeine'] / 400)
+        : "0";
+    final String totalSugar = widget.statistics != null
+        ? (widget.statistics!['totalSugar']).toString()
+        : "0";
+    final double percentSugar = widget.statistics != null
+        ? (widget.statistics!['totalSugar'] / 36)
+        : "0";
     return Stack(
       alignment: Alignment.bottomRight,
       children: [
@@ -53,7 +78,7 @@ class _SummaryWaterState extends State<SummaryWater> {
               LinearPercentIndicator(
                 width: 170,
                 lineHeight: 8.0,
-                percent: 0.8,
+                percent: percent > 1 ? 1 : percent,
                 barRadius: const Radius.circular(15),
                 progressColor: Colors.blue,
                 backgroundColor: Colors.grey,
@@ -65,7 +90,7 @@ class _SummaryWaterState extends State<SummaryWater> {
                   ),
                   RichText(
                     text: TextSpan(
-                        text: '1.85/2.13',
+                        text: '$totalLitre/$waterConsumingRate',
                         style: GoogleFonts.openSans(
                             fontSize: 19,
                             color: tertiaryColor,
@@ -84,9 +109,8 @@ class _SummaryWaterState extends State<SummaryWater> {
               ),
               TextButton(
                   onPressed: () {
-                     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            const AddWater()));
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (BuildContext context) => const AddWater()));
                   },
                   child: Text(
                     'Add water',
@@ -125,13 +149,13 @@ class _SummaryWaterState extends State<SummaryWater> {
                     LinearPercentIndicator(
                       width: 130,
                       lineHeight: 8.0,
-                      percent: 0.8,
+                      percent: percentCaffeine,
                       barRadius: const Radius.circular(15),
                       progressColor: Colors.brown,
                       backgroundColor: Colors.grey,
                     ),
                     Text(
-                      '15/25 Grams',
+                      '$totalCaffeine/400 mg',
                       style: GoogleFonts.openSans(
                           fontSize: 12,
                           color: tertiaryColor,
@@ -151,13 +175,13 @@ class _SummaryWaterState extends State<SummaryWater> {
                     LinearPercentIndicator(
                       width: 130,
                       lineHeight: 8.0,
-                      percent: 0.8,
+                      percent: percentSugar,
                       barRadius: const Radius.circular(15),
                       progressColor: Colors.redAccent,
                       backgroundColor: Colors.grey,
                     ),
                     Text(
-                      '15/25 Grams',
+                      '$totalSugar/36 grams',
                       style: GoogleFonts.openSans(
                           fontSize: 12,
                           color: tertiaryColor,
