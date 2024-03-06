@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
     final userInfo = await Shared.getUserInfo();
     final token = await Shared.getToken();
     if (userInfo != null && token != null) {
-      final responseData = await getStatistics(token, userInfo,now);
+      final responseData = await getStatistics(token, userInfo, now);
       return {
         'userInfo': userInfo,
         'statistics': responseData,
@@ -37,14 +37,11 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-
   String now = intl.DateFormat('yyyy-MM-dd').format(DateTime.now());
 
   Future<Map<String, dynamic>?> getStatistics(
-      String token, Map<String, dynamic> userInfo ,String now) async {
+      String token, Map<String, dynamic> userInfo, String now) async {
     String userId = userInfo['_id'];
-    
-  
 
     try {
       final response = await http.post(
@@ -117,7 +114,8 @@ class _HomeState extends State<Home> {
                           Summary_Nutrition(
                               userInfo: userInfo,
                               statistics: statistics), // Pass statistics here
-                          SummaryWater(),
+                          SummaryWater(
+                              userInfo: userInfo, statistics: statistics),
                         ],
                       );
                     } else {

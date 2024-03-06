@@ -19,6 +19,11 @@ class Summary_Nutrition extends StatelessWidget {
   Widget build(BuildContext context) {
     var now = DateTime.now();
     var formatter = intl.DateFormat('d MMM yyyy');
+    var percent =
+        statistics!['totalCalories'] / userInfo!['totalDailyCalories'];
+    print(statistics!['totalCalories']);
+    print(userInfo!['totalDailyCalories']);
+    print(percent);
     final caloriesLeft =
         userInfo!['totalDailyCalories'] - statistics!['totalCalories'];
     final calPercent =
@@ -130,7 +135,7 @@ class Summary_Nutrition extends StatelessWidget {
                                 RichText(
                                   text: TextSpan(
                                       text:
-                                          '${statistics!['totalLitre'].toString()}/$waterlitre',
+                                          '${(statistics!['totalLitre'] / 1000).toString()}/$waterlitre',
                                       style: GoogleFonts.openSans(
                                           fontSize: 19,
                                           color: tertiaryColor,
@@ -160,7 +165,7 @@ class Summary_Nutrition extends StatelessWidget {
                                 lineWidth: 5,
                                 backgroundColor: Colors.grey,
                                 progressColor: Colors.orange,
-                                percent: calPercent / 100,
+                                percent: percent > 1 ? 1 : percent,
                                 center: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -169,7 +174,9 @@ class Summary_Nutrition extends StatelessWidget {
                                       height: 30,
                                     ),
                                     Text(
-                                      caloriesLeft.toString(),
+                                      caloriesLeft > 0
+                                          ? caloriesLeft.toString()
+                                          : "0",
                                       style: GoogleFonts.openSans(
                                           fontSize: 24,
                                           color: primaryColor,
@@ -221,11 +228,12 @@ class Summary_Nutrition extends StatelessWidget {
                             LinearPercentIndicator(
                                 lineHeight: 5.0,
                                 width: 100,
-                                percent: 0.8,
+                                percent: statistics!['totalProtein'] /
+                                    userInfo!['proteinConsumingRate'],
                                 barRadius: const Radius.circular(15),
                                 progressColor: Colors.purple),
                             Text(
-                              '15/50 Grams',
+                              '${statistics!['totalProtein'].toString()}/${userInfo!['proteinConsumingRate'].toString()}',
                               style: GoogleFonts.openSans(
                                   fontSize: 12,
                                   color: tertiaryColor,
@@ -245,11 +253,12 @@ class Summary_Nutrition extends StatelessWidget {
                             LinearPercentIndicator(
                                 width: 100,
                                 lineHeight: 5.0,
-                                percent: 0.8,
+                                percent: statistics!['totalCarbohydate'] /
+                                    userInfo!['carbConsumingRate'],
                                 barRadius: const Radius.circular(15),
                                 progressColor: Colors.lightBlue),
                             Text(
-                              '15/300 Grams',
+                              '${statistics!['totalCarbohydate'].toString()}/${userInfo!['carbConsumingRate'].toString()}',
                               style: GoogleFonts.openSans(
                                   fontSize: 12,
                                   color: tertiaryColor,
@@ -269,12 +278,13 @@ class Summary_Nutrition extends StatelessWidget {
                             LinearPercentIndicator(
                               width: 100,
                               lineHeight: 5.0,
-                              percent: 0.6,
+                              percent: statistics!['totalFat'] /
+                                  userInfo!['fatConsumingRate'],
                               barRadius: const Radius.circular(15),
                               progressColor: Colors.orange,
                             ),
                             Text(
-                              '15/66 Grams',
+                              '${statistics!['totalFat'].toString()}/${userInfo!['fatConsumingRate'].toString()}',
                               style: GoogleFonts.openSans(
                                   fontSize: 12,
                                   color: tertiaryColor,
