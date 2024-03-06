@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:app/%E0%B8%B5utils/sharedPerference.dart';
 import 'package:dio/dio.dart';
 import 'package:app/%E0%B8%B5utils/api/post_confirmAddFood.dart';
 import 'package:app/%E0%B8%B5utils/statics.dart';
@@ -51,8 +52,7 @@ class _PredictionResultsPageState extends State<PredictionResultsPage> {
 
     try {
       Response response;
-      var token =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTZmMzFkOTA1MDVlMjY3ZWJmNWVhNTciLCJpYXQiOjE3MDg0ODc3OTEsImV4cCI6MTcwOTA5MjU5MX0.RkjXI3JPRWY_0vx9x9uLrhk6hwifuilKv4kJ8dpyKuc";
+      var token = Shared.getToken();
 
       response = await dio.post(
         'https://foodcal-app.up.railway.app/food-history/saveFood',

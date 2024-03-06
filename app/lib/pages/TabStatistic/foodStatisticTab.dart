@@ -69,7 +69,7 @@ class _FoodStatisticTabState extends State<FoodStatisticTab> {
               width: size.width * 0.7,
               child: DatePicker(
                 // prefere calendar_timeline 1.1.2
-                DateTime.now().subtract(Duration(days: 31)),
+                DateTime.now().subtract(Duration(days: 5)),
                 height: size.height * 0.13,
                 width: size.width * 0.15,
                 controller: _controller,
@@ -89,38 +89,41 @@ class _FoodStatisticTabState extends State<FoodStatisticTab> {
                 },
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                   _controller.animateToDate(_selectedDate);
-              },
-              child: Container(
-                width: size.width * 0.2,
-                height:size.height *0.13,
-                decoration: BoxDecoration(
-                  color: primaryColor , 
-                  borderRadius: BorderRadius.circular(13)
+            
+            Container(
+              child: GestureDetector(
+                onTap: () {
+                     _controller.animateToDate(DateTime.now());
+                },
+                child: Container(
+                  width: size.width * 0.2,
+                  height:size.height *0.13,
+                  decoration: BoxDecoration(
+                    color: primaryColor , 
+                    borderRadius: BorderRadius.circular(13)
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Go', style: GoogleFonts.openSans(
+                        fontSize : 16, 
+                        fontWeight : FontWeight.bold, 
+                        color : Colors.white
+                      ),), 
+                      Text( 'To', style: GoogleFonts.openSans(
+                        fontSize : 16, 
+                        fontWeight : FontWeight.bold, 
+                        color : Colors.white),),
+                      Text('Current', style: GoogleFonts.openSans(
+                        fontSize : 16, 
+                        fontWeight : FontWeight.bold, 
+                        color : Colors.white),)
+                    ],
+                  ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Go', style: GoogleFonts.openSans(
-                      fontSize : 16, 
-                      fontWeight : FontWeight.bold, 
-                      color : Colors.white
-                    ),), 
-                    Text( 'To', style: GoogleFonts.openSans(
-                      fontSize : 16, 
-                      fontWeight : FontWeight.bold, 
-                      color : Colors.white),),
-                    Text('Current', style: GoogleFonts.openSans(
-                      fontSize : 16, 
-                      fontWeight : FontWeight.bold, 
-                      color : Colors.white),)
-                  ],
-                ),
+                
               ),
-              
             )
           ],
         ),
