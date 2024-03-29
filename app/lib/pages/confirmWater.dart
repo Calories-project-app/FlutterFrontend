@@ -57,7 +57,7 @@ class _ConfirmWaterState extends State<ConfirmWater> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0, 1.85),
+              alignment: AlignmentDirectional(0, 1.05),
               child: Container(
                 width: 395,
                 height: 643,
@@ -149,7 +149,7 @@ class _ConfirmWaterState extends State<ConfirmWater> {
               child: Stack(
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(-0.75, -1.02),
+                    alignment: AlignmentDirectional(-0.75, -0.85),
                     child: Text(
                       'Water Tracking',
                       style: GoogleFonts.openSans(
@@ -159,7 +159,7 @@ class _ConfirmWaterState extends State<ConfirmWater> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(0, 0.32),
+                    alignment: AlignmentDirectional(0, 0.28),
                     child: SliderTheme(
                       data: SliderThemeData(
                         trackHeight: 200,

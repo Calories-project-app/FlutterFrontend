@@ -20,8 +20,6 @@ class TestImage extends StatefulWidget {
 }
 
 class _TestImageState extends State<TestImage> {
-  
-
   Future<void> uploadFoodData() async {
     try {
       // Temporary values for testing
@@ -37,11 +35,12 @@ class _TestImageState extends State<TestImage> {
       List<int> bytes =
           data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await imageFile.writeAsBytes(bytes);
-      
+
       // Prepare the data
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('https://foodcal-app.up.railway.app/food-history/saveFood'),
+        Uri.parse(
+            'https://foodcal-api-latest.onrender.com/food-history/saveFood'),
       );
       request.fields['userId'] = userId;
       request.fields['calories'] = widget.response['calories'].toString();

@@ -34,13 +34,14 @@ class _PredictionResultsPageState extends State<PredictionResultsPage> {
     String protein,
   ) async {
     Dio dio = Dio();
-
+    var user = await Shared.getUserId();
+    print('User: $user');
     setState(() {
       showSpinner = true;
     });
 
     FormData formData = FormData.fromMap({
-      'userId': "651c0e7bdc2e3d9c0ff7b6e0",
+      'userId': '$user',
       "foodName": foodName,
       "calories": calories,
       "fat": fat,
@@ -52,10 +53,15 @@ class _PredictionResultsPageState extends State<PredictionResultsPage> {
 
     try {
       Response response;
-      var token = Shared.getToken();
+      var token;
+      await Shared.getToken().then((value) => setState(() {
+            token = value;
+          }));
 
+      print(token);
+      print('token dd');
       response = await dio.post(
-        'https://foodcal-app.up.railway.app/food-history/saveFood',
+        'https://foodcal-api-latest.onrender.com/food-history/saveFood',
         options: Options(headers: {
           "Accept": "application/json",
           "content-type": "multipart/form-data",
@@ -95,11 +101,13 @@ class _PredictionResultsPageState extends State<PredictionResultsPage> {
     print('text : ${widget.response} ');
     Map<String, dynamic>? responseData = widget.response;
     String foodName = responseData?['results'][0]['name'] ?? '';
-    double calories = responseData?['calories']?.toDouble() ?? 0.0;
-    double carbSum = responseData?['carb_sum']?.toDouble() ?? 0.0;
-    double fatSum = responseData?['fat_sum']?.toDouble() ?? 0.0;
-    double proteinSum = responseData?['protein_sum']?.toDouble() ?? 0.0;
+    double calories = responseData?['calories']?.toDouble() * 10 ?? 0.0;
+    double carbSum = responseData?['carb_sum']?.toDouble() * 10 ?? 0.0;
+    double fatSum = responseData?['fat_sum']?.toDouble() * 10 ?? 0.0;
+    double proteinSum = responseData?['protein_sum']?.toDouble() * 10 ?? 0.0;
 
+    String allNames =
+        responseData?['results'].map((result) => result['name']).join(', ');
     return Scaffold(
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -109,7 +117,7 @@ class _PredictionResultsPageState extends State<PredictionResultsPage> {
             SizedBox(height: 20),
             Center(
               child: Text(
-                foodName,
+                allNames,
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
@@ -124,12 +132,19 @@ class _PredictionResultsPageState extends State<PredictionResultsPage> {
             SizedBox(height: 20),
             RichText(
               text: TextSpan(
-                  text: '  $calories',
+                  text: '  Calories :',
                   style: GoogleFonts.openSans(
                       fontSize: 26,
                       color: tertiaryColor,
                       fontWeight: FontWeight.w700),
                   children: <TextSpan>[
+                    TextSpan(
+                      text: ' ${calories.toStringAsFixed(2)}',
+                      style: GoogleFonts.openSans(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700),
+                    ),
                     TextSpan(
                       text: ' Kilocalories',
                       style: GoogleFonts.openSans(
@@ -140,21 +155,21 @@ class _PredictionResultsPageState extends State<PredictionResultsPage> {
                   ]),
             ),
             SizedBox(height: 10),
-            LinearPercentIndicator(
-                lineHeight: 12.0,
-                width: 330,
-                percent: 0.8,
-                barRadius: const Radius.circular(20),
-                progressColor: primaryColor),
-            SizedBox(height: 10),
             RichText(
               text: TextSpan(
-                  text: '  $proteinSum',
+                  text: '  Protein :',
                   style: GoogleFonts.openSans(
                       fontSize: 26,
-                      color: tertiaryColor,
+                      color: Colors.purple,
                       fontWeight: FontWeight.w700),
                   children: <TextSpan>[
+                    TextSpan(
+                      text: ' ${proteinSum.toStringAsFixed(2)}',
+                      style: GoogleFonts.openSans(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700),
+                    ),
                     TextSpan(
                       text: ' Protein Grams',
                       style: GoogleFonts.openSans(
@@ -165,21 +180,21 @@ class _PredictionResultsPageState extends State<PredictionResultsPage> {
                   ]),
             ),
             SizedBox(height: 10),
-            LinearPercentIndicator(
-                lineHeight: 12.0,
-                width: 330,
-                percent: 0.8,
-                barRadius: const Radius.circular(20),
-                progressColor: Colors.purple),
-                SizedBox(height: 10),
             RichText(
               text: TextSpan(
-                  text: '  $carbSum',
+                  text: '  Crabs :',
                   style: GoogleFonts.openSans(
                       fontSize: 26,
-                      color: tertiaryColor,
+                      color: Colors.blue,
                       fontWeight: FontWeight.w700),
                   children: <TextSpan>[
+                    TextSpan(
+                      text: '  ${carbSum.toStringAsFixed(2)}',
+                      style: GoogleFonts.openSans(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700),
+                    ),
                     TextSpan(
                       text: ' Carbs Grams',
                       style: GoogleFonts.openSans(
@@ -190,21 +205,21 @@ class _PredictionResultsPageState extends State<PredictionResultsPage> {
                   ]),
             ),
             SizedBox(height: 10),
-            LinearPercentIndicator(
-                lineHeight: 12.0,
-                width: 330,
-                percent: 0.8,
-                barRadius: const Radius.circular(20),
-                progressColor: Colors.blue),
-              SizedBox(height: 10),
             RichText(
               text: TextSpan(
-                  text: '  $fatSum',
+                  text: '  Fat : ',
                   style: GoogleFonts.openSans(
                       fontSize: 26,
-                      color: tertiaryColor,
+                      color: primaryColor,
                       fontWeight: FontWeight.w700),
                   children: <TextSpan>[
+                    TextSpan(
+                      text: '  ${fatSum.toStringAsFixed(2)}',
+                      style: GoogleFonts.openSans(
+                          fontSize: 16,
+                          color: tertiaryColor,
+                          fontWeight: FontWeight.w700),
+                    ),
                     TextSpan(
                       text: ' Fat Grams',
                       style: GoogleFonts.openSans(
@@ -214,40 +229,33 @@ class _PredictionResultsPageState extends State<PredictionResultsPage> {
                     )
                   ]),
             ),
-            SizedBox(height: 10),
-            LinearPercentIndicator(
-                lineHeight: 12.0,
-                width: 330,
-                percent: 0.8,
-                barRadius: const Radius.circular(20),
-                progressColor: primaryColor),
-                
-                
-            
             SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                 
                   onPressed: () {
                     // Implement cancel button functionality here
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
-                  child: Text('Cancel' , style: GoogleFonts.openSans(
-                    color : Colors.white
-                  )),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: primaryColor),
+                  child: Text('Cancel',
+                      style: GoogleFonts.openSans(color: Colors.white)),
                 ),
                 SizedBox(width: 20),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: primaryColor),
                   onPressed: () {
                     upload(foodName, calories.toString(), fatSum.toString(),
                         carbSum.toString(), proteinSum.toString());
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
+                    print(
+                        '${foodName} , ${calories.toString()} ,  ${fatSum.toString()} ,  ${carbSum.toString()} ,  ${calories.toString()} ,  ${proteinSum.toString()}');
                   },
-                  child: Text('Confirm', style: GoogleFonts.openSans(
-                    color : Colors.white
-                  )),
+                  child: Text('Confirm',
+                      style: GoogleFonts.openSans(color: Colors.white)),
                 ),
               ],
             ),

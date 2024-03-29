@@ -20,8 +20,23 @@ class _TopCalState extends State<TopCal> {
   @override
   void initState() {
     super.initState();
+    String? id;
+    Shared.getUserId().then((value) {
+      print('dsa');
+      print(value);
+      setState(() {
+        id = value;
+        print('id from set');
+        print(id);
+      });
+    });
+    print('from top cal init');
+    print(id);
     // Fetch user ID and then fetch food streak friends
     Shared.getUserId().then((userId) {
+      print('from topcal');
+      print(userId);
+
       if (userId != null) {
         setState(() {
           _userId = userId; // Assign user ID
@@ -61,11 +76,12 @@ class _TopCalState extends State<TopCal> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white, // Background color set to white
-                        borderRadius:
-                            BorderRadius.circular(20), // Make the container round
+                        borderRadius: BorderRadius.circular(
+                            20), // Make the container round
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5), // Drop shadow color
+                            color: Colors.grey
+                                .withOpacity(0.5), // Drop shadow color
                             spreadRadius: 2, // Spread radius
                             blurRadius: 5, // Blur radius
                             offset: Offset(0, 3), // Offset from the container
@@ -78,7 +94,7 @@ class _TopCalState extends State<TopCal> {
                         child: Row(
                           children: [
                             Container(
-                              width: size.width *0.1,
+                              width: size.width * 0.1,
                               child: Center(
                                 child: Text(
                                   '${index + 1}',
@@ -97,33 +113,33 @@ class _TopCalState extends State<TopCal> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                Text(
-                                  '${foodStreak.name}',
-                                  style: GoogleFonts.openSans(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                                if (foodStreak.foodStreak == 1 ||
-                                    foodStreak.foodStreak == 0)
                                   Text(
-                                    '${foodStreak.foodStreak} day food streak',
+                                    '${foodStreak.name}',
                                     style: GoogleFonts.openSans(
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      color: const Color(0xFF706C6C),
-                                    ),
-                                  )
-                                else
-                                  Text(
-                                    '${foodStreak.foodStreak} days food streak',
-                                    style: GoogleFonts.openSans(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      color: const Color(0xFF706C6C),
+                                      fontWeight: FontWeight.w700,
                                     ),
                                   ),
-                              ],
+                                  if (foodStreak.foodStreak == 1 ||
+                                      foodStreak.foodStreak == 0)
+                                    Text(
+                                      '${foodStreak.foodStreak} day food streak',
+                                      style: GoogleFonts.openSans(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: const Color(0xFF706C6C),
+                                      ),
+                                    )
+                                  else
+                                    Text(
+                                      '${foodStreak.foodStreak} days food streak',
+                                      style: GoogleFonts.openSans(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: const Color(0xFF706C6C),
+                                      ),
+                                    ),
+                                ],
                               ),
                             ),
                           ],

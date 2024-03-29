@@ -5,7 +5,6 @@ import 'package:app/pages/TabStatistic/allStatisticTab.dart';
 import 'package:app/pages/TabStatistic/foodStatisticTab.dart';
 import 'package:app/pages/TabStatistic/waterSatisticTab.dart';
 import 'package:app/pages/foodhistory.dart';
-import 'package:app/pages/waterhistory.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,10 +26,10 @@ class _StatisticsState extends State<Statistics> {
   final List<Widget> _pages = [
     AllStisticTab(),
     FoodStatisticTab(),
-    WaterHistoryScreen()
+    WaterStatisticTab()
   ];
 
-  int current = 0;
+  int current =0;
   /* Future<void> getFood() async {
     _food = await getFoodById("656f2c960b601921f3a673f3") as List;
     setState(() {
@@ -41,6 +40,7 @@ class _StatisticsState extends State<Statistics> {
 */
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
         body: Padding(
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
@@ -48,6 +48,9 @@ class _StatisticsState extends State<Statistics> {
               child: Column(
                 children: [
                   SizedBox(
+                    height: size.height * 0.06,
+                  ),
+                  /*SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
                         onPressed: () {},
@@ -62,7 +65,7 @@ class _StatisticsState extends State<Statistics> {
                                 fontSize: 22,
                                 color: Color(0xFFFFFFFFF),
                                 fontWeight: FontWeight.w700))),
-                  ),
+                  ),*/
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -74,7 +77,8 @@ class _StatisticsState extends State<Statistics> {
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryColor,
+                              backgroundColor: current == 0 
+                              ? Color(0xFFC47703) : primaryColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
@@ -82,18 +86,22 @@ class _StatisticsState extends State<Statistics> {
                             child: Text('All',
                                 style: GoogleFonts.openSans(
                                     fontSize: 22,
-                                    color: Color(0xFFFFFFFFF),
+                                    color: Color(0xFFFFFFFFF) ,
                                     fontWeight: FontWeight.w700))),
                       ),
                       SizedBox(
+                        
                         child: ElevatedButton(
+
                             onPressed: () {
                               setState(() {
                                 current = 1;
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryColor,
+                            
+                              backgroundColor:  current == 1 
+                              ? Color(0xFFC47703) : primaryColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
@@ -112,7 +120,8 @@ class _StatisticsState extends State<Statistics> {
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryColor,
+                              backgroundColor:  current == 2 
+                              ? Color(0xFFC47703) : primaryColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),

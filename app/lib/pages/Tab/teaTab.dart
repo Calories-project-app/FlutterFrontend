@@ -24,7 +24,7 @@ class _TeaTabTabState extends State<TeaTab> {
             child: Material(
               child: InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) =>
                             const ConfirmWater()));
                   },
@@ -45,15 +45,14 @@ class _TeaTabTabState extends State<TeaTab> {
                             SizedBox(
                               width: 20,
                             ),
-                            Positioned(
-                                child: Container(
+                            Container(
                               height: 55,
                               width: 50,
                               decoration: const BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage('assets/tea-2.png'),
                                       fit: BoxFit.fill)),
-                            )),
+                            ),
                             SizedBox(
                               width: 30,
                             ),
@@ -102,7 +101,7 @@ class _TeaTabTabState extends State<TeaTab> {
             child: Material(
               child: InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) =>
                             const ConfirmWater()));
                   },
@@ -123,15 +122,14 @@ class _TeaTabTabState extends State<TeaTab> {
                             SizedBox(
                               width: 20,
                             ),
-                            Positioned(
-                                child: Container(
+                            Container(
                               height: 55,
                               width: 50,
                               decoration: const BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage('assets/tea-2.png'),
                                       fit: BoxFit.fill)),
-                            )),
+                            ),
                             SizedBox(
                               width: 30,
                             ),
@@ -180,7 +178,7 @@ class _TeaTabTabState extends State<TeaTab> {
             child: Material(
               child: InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) =>
                             const ConfirmWater()));
                   },
@@ -201,15 +199,14 @@ class _TeaTabTabState extends State<TeaTab> {
                             const SizedBox(
                               width: 20,
                             ),
-                            Positioned(
-                                child: Container(
+                            Container(
                               height: 55,
                               width: 50,
                               decoration: const BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage('assets/tea-2.png'),
                                       fit: BoxFit.fill)),
-                            )),
+                            ),
                             const SizedBox(
                               width: 30,
                             ),

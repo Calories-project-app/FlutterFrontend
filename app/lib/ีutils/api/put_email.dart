@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 
 Future<void> changePassword(String email, BuildContext context) async {
   // Endpoint URL
-  final String apiUrl = 'https://foodcal-app.up.railway.app/auth/change-password';
+  final String apiUrl =
+      'https://foodcal-api-latest.onrender.com/auth/change-password';
 
   // Request body
   Map<String, dynamic> requestBody = {
@@ -37,7 +38,8 @@ Future<void> changePassword(String email, BuildContext context) async {
       // Show failure Snackbar
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Failed to change password. Status code: ${response.statusCode}'),
+          content: Text(
+              'Failed to change password. Status code: ${response.statusCode}'),
           backgroundColor: Colors.red,
         ),
       );

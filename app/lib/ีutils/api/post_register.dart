@@ -12,7 +12,8 @@ class APIService {
     required String weightGoal,
     required String activityLevel,
   }) async {
-    final Uri uri = Uri.parse('https://foodcal-app.up.railway.app/auth/register');
+    final Uri uri =
+        Uri.parse('https://foodcal-api-latest.onrender.com/auth/register');
     final Map<String, String> body = {
       'email': email,
       'password': password,

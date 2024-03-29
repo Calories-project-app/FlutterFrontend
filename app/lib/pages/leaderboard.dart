@@ -41,59 +41,59 @@ class _LeaderboardState extends State<Leaderboard>
           elevation: 0,
         ),
         body: SafeArea(
-            
             child: Stack(children: [
-              Align(
-                alignment: const AlignmentDirectional(0, -1.75),
-                child: Container(
-                  width: 394,
-                  height: 400,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFF39200),
-                  ),
-                ),
+          Align(
+            alignment: const AlignmentDirectional(0, -1.75),
+            child: Container(
+              width: 394,
+              height: 400,
+              decoration: const BoxDecoration(
+                color: Color(0xFFF39200),
               ),
-              Align(
-                alignment: const AlignmentDirectional(-1.39, -1.05),
-                child: Container(
-                  width: 160,
-                  height: 160,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xFFFFC875),
-                  ),
-                ),
+            ),
+          ),
+          Align(
+            alignment: const AlignmentDirectional(-1.39, -1.05),
+            child: Container(
+              width: 160,
+              height: 160,
+              clipBehavior: Clip.antiAlias,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFFFC875),
               ),
-              Align(
-                alignment: const AlignmentDirectional(1.58, -1.66),
-                child: Container(
-                  width: 160,
-                  height: 160,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xFFFFC875),
-                  ),
-                ),
+            ),
+          ),
+          Align(
+            alignment: const AlignmentDirectional(1.58, -1.66),
+            child: Container(
+              width: 160,
+              height: 160,
+              clipBehavior: Clip.antiAlias,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFFFC875),
               ),
-              Align(
-                alignment: const AlignmentDirectional(0, -1.05),
-                child: Container(
-                  width: size.width,
-                  height: 160,
-                  child: Column(
-                    children: [
-                      Text(
-                        'Leaderboard',
-                        style: GoogleFonts.openSans(
-                            fontSize: 24,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
-                        child: Container(
+            ),
+          ),
+          Align(
+            alignment: const AlignmentDirectional(0, -1.05),
+            child: Container(
+              width: size.width,
+              height: 160,
+              child: Column(
+                children: [
+                  Text(
+                    'Leaderboard',
+                    style: GoogleFonts.openSans(
+                        fontSize: 24,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(5, 5, 5, 0),
+                  ),
+                  Container(
                           width: size.width * 0.8,
                           height: size.height * 0.05,
                           child: TextField(
@@ -117,101 +117,101 @@ class _LeaderboardState extends State<Leaderboard>
                                 hintText: "Add friend"),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: size.height * 0.012,
-                      ),
-                      Container(
-                        width: size.width * 0.8,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFE18904),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(5),
-                              child: TabBar(
-                                unselectedLabelColor: Colors.white,
-                                labelColor: Colors.white,
-                                indicatorColor: Colors.transparent,
-                                dividerColor: Colors.transparent,
-                                indicator: BoxDecoration(
-                                    color: primaryColor,
-                                    borderRadius: BorderRadius.circular(5)),
-                                controller: tabController,
-                                tabs: [
-                                  Tab(
-                                    child: Container(
-                                      width: double
-                                          .infinity, // Set width to cover the entire tab
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        'Calories',
-                                        style: GoogleFonts.openSans(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-                                  ),
-                                  Tab(
-                                    child: Container(
-                                      width: double
-                                          .infinity, // Set width to cover the entire tab
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        'Water',
-                                        style: GoogleFonts.openSans(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                  SizedBox(
+                    height: size.height * 0.012,
                   ),
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0, 120.85),
-                child: Container(
-                    width: size.width,
-                    height: size.height * 0.8215,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(0),
-                        topLeft: Radius.circular(40),
-                        topRight: Radius.circular(40),
-                      ),
+                  Container(
+                    width: size.width * 0.8,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFE18904),
+                      borderRadius: BorderRadius.circular(5),
                     ),
                     child: Column(
                       children: [
-                        SizedBox(
-                          height: size.height * 0.1,
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            child: TabBarView(
-                              controller: tabController,
-                              children: [
-                                TopCal(),
-                                TopWater(),
-                              ],
-                            ),
+                        
+                        Padding(
+                          padding: EdgeInsets.all(5),
+                          child: TabBar(
+                            unselectedLabelColor: Colors.white,
+                            labelColor: Colors.white,
+                            indicatorColor: Colors.transparent,
+                            dividerColor: Colors.transparent,
+                            indicator: BoxDecoration(
+                                color: primaryColor,
+                                borderRadius: BorderRadius.circular(5)),
+                            controller: tabController,
+                            tabs: [
+                              Tab(
+                                child: Container(
+                                  width: double
+                                      .infinity, // Set width to cover the entire tab
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Calories',
+                                    style: GoogleFonts.openSans(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                              ),
+                              Tab(
+                                child: Container(
+                                  width: double
+                                      .infinity, // Set width to cover the entire tab
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Water',
+                                    style: GoogleFonts.openSans(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
-                        ),
+                        )
                       ],
-                    )),
+                    ),
+                  )
+                ],
               ),
-              /*Align(
+            ),
+          ),
+          Align(
+            alignment: AlignmentDirectional(0, 25.85),
+            child: Container(
+                width: size.width,
+                height: size.height * 0.8215,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(0),
+                    bottomRight: Radius.circular(0),
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(40),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: size.height * 0.1,
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child: TabBarView(
+                          controller: tabController,
+                          children: [
+                            TopCal(),
+                            TopWater(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+          ),
+          /*Align(
                 alignment: AlignmentDirectional(0, -0.45),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -245,6 +245,6 @@ class _LeaderboardState extends State<Leaderboard>
                   ),
                 ]),
               )*/
-            ])));
+        ])));
   }
 }

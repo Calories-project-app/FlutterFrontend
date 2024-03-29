@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Profile extends StatefulWidget {
@@ -16,6 +18,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false ,
@@ -62,7 +65,7 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0, 50.85),
+              alignment: AlignmentDirectional(0, 4.05),
               child: Container(
                 width: 395,
                 height: 643,
@@ -161,12 +164,29 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () {
+                          
+                        },
+                        child: Text('Confirm',
+                            style: GoogleFonts.openSans(
+                                fontSize: 16,
+                                color: Color(0xFF594949),
+                                fontWeight: FontWeight.w500)),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
-            Align(
-              alignment: AlignmentDirectional(0, -1.05),
+
+            
+            Positioned(
+              left: size.width / 3,
               child: Container(
                 width: 160,
                 height: 160,

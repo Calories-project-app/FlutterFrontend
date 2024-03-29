@@ -3,7 +3,9 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:app/%E0%B8%B5utils/statics.dart';
 import 'package:app/pages/image/predict.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,8 +16,8 @@ class PreviewImagePage extends StatelessWidget {
 
   Future<Map<String, dynamic>> uploadImage(String imagePath) async {
     // API endpoint URL
-    var url = Uri.parse(
-        'https://food-calories-model-production.up.railway.app/api/predict');
+    var url =
+        Uri.parse('https://ce66-07.cloud.ce.kmitl.ac.th/flask/api/predict');
 
     try {
       // Load image from file
@@ -60,72 +62,84 @@ class PreviewImagePage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Preview Image' , style: GoogleFonts.openSans(),),
+        title: Text(
+          'Preview Image',
+          style: GoogleFonts.openSans(
+            color: Colors.white,
+          ),
+        ),
+        leading: IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: Icon(Icons.arrow_back_ios),
+            color: Colors.white),
         backgroundColor: primaryColor,
       ),
       body: Container(
         child: Column(
           children: [
-            SizedBox(
-              height: size.height * 0.7,
+            Container(
+              height: size.height * 0.8,
               width: size.width,
-              child: Image.file(imagePath),
+              child: Image.file(
+                imagePath,
+                fit: BoxFit.cover,
+              ),
             ),
-            ElevatedButton(
+            Container(
+              height: size.height * 0.1,
+              width: size.width ,
+              color: primaryColor,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  maximumSize: Size(10, 10), // Adjust the size here
+                ),
+                onPressed: () async {
+                  print(imagePath.path);
+                  Map<String, dynamic> response = await uploadImage(
+                      imagePath.path); // Pass imagePath.path
+                  print(imagePath);
+                  print(response);
               
-              
-              onPressed: () async {
-                Map<String, dynamic> response =
-                    await uploadImage(imagePath.path); // Pass imagePath.path
-                print(imagePath);
-                print(response);
-
-                if (response['calories'] == 0 &&
-                    response['carb_sum'] == 0 &&
-                    response['fat_sum'] == 0 &&
-                    response['protein_sum'] == 0 &&
-                    response['results'] != null &&
-                    response['results'].isEmpty) {
-          
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Confirmation'),
-                        content: Text(
-                            'This Image is can not use for predict'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              Navigator.of(context).pop();
-                            },
-                            child: Text('Yes'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                } else {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PredictionResultsPage(
-                        response: response,
-                        image: imagePath,
+                  if (response['calories'] == 0 &&
+                      response['carb_sum'] == 0 &&
+                      response['fat_sum'] == 0 &&
+                      response['protein_sum'] == 0 &&
+                      response['results'] != null &&
+                      response['results'].isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Can not use this image.'),
+                          content:
+                              Text('This Image is can not use for predict.'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Okay'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PredictionResultsPage(
+                          response: response,
+                          image: imagePath,
+                        ),
                       ),
-                    ),
-                  );
-                }
-              },
-              child: Text('Upload'),
-            )
+                    );
+                  }
+                },
+                child: Text('Upload'),
+              ),
+            ),
           ],
         ),
       ),

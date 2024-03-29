@@ -3,21 +3,26 @@ import 'package:app/%E0%B8%B5utils/model/PostWaterByDate.dart';
 import 'package:http/http.dart' as http;
 
 class WaterHistoryApi {
-  static const String baseUrl = 'https://foodcal-app.up.railway.app';
+  static const String baseUrl = 'https://foodcal-api-latest.onrender.com';
   static const String endpoint = '/water-history/waterHistory/oneDayStatistics';
 
-  static Future<WaterHistory> fetchWaterHistory(String userId, String date, String token) async {
+  static Future<List<WaterHistory>> fetchWaterHistory(
+      String userId, String date, String token) async {
     final response = await http.post(
       Uri.parse(baseUrl + endpoint),
-      headers: {
+      headers: <String, String>{
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
       },
-      body: jsonEncode({'userId': userId, 'date': date}),
+      body: jsonEncode(<String, String>{'userId': userId, 'date': date}),
     );
-
+    print("This is body");
+    print(response.body);
+    print("This is Header");
+    print(response.headers);
     if (response.statusCode == 200) {
-      return WaterHistory.fromJson(jsonDecode(response.body));
+      List<dynamic> data = json.decode(response.body)['waterHistory'];
+      return data.map((json) => WaterHistory.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load water history');
     }

@@ -24,7 +24,7 @@ class _WaterTabTabState extends State<WaterTab> {
             child: Material(
               child: InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) =>
                             const ConfirmWater()));
                   },
@@ -45,15 +45,15 @@ class _WaterTabTabState extends State<WaterTab> {
                             SizedBox(
                               width: 30,
                             ),
-                            Positioned(
-                                child: Container(
+                            Container(
                               height: 55,
                               width: 20,
                               decoration: const BoxDecoration(
                                   image: DecorationImage(
-                                      image: AssetImage('assets/smallbottle.png'),
+                                      image:
+                                          AssetImage('assets/smallbottle.png'),
                                       fit: BoxFit.fill)),
-                            )),
+                            ),
                             SizedBox(
                               width: 50,
                             ),
@@ -102,7 +102,7 @@ class _WaterTabTabState extends State<WaterTab> {
             child: Material(
               child: InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) =>
                             const ConfirmWater()));
                   },
@@ -123,15 +123,15 @@ class _WaterTabTabState extends State<WaterTab> {
                             SizedBox(
                               width: 30,
                             ),
-                            Positioned(
-                                child: Container(
+                            Container(
                               height: 55,
                               width: 20,
                               decoration: const BoxDecoration(
                                   image: DecorationImage(
-                                      image: AssetImage('assets/mediumbottle.png'),
+                                      image:
+                                          AssetImage('assets/mediumbottle.png'),
                                       fit: BoxFit.fill)),
-                            )),
+                            ),
                             SizedBox(
                               width: 50,
                             ),
@@ -180,7 +180,7 @@ class _WaterTabTabState extends State<WaterTab> {
             child: Material(
               child: InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) =>
                             const ConfirmWater()));
                   },
@@ -201,15 +201,14 @@ class _WaterTabTabState extends State<WaterTab> {
                             const SizedBox(
                               width: 30,
                             ),
-                            Positioned(
-                                child: Container(
+                            Container(
                               height: 55,
                               width: 20,
                               decoration: const BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage('assets/bigbottle.png'),
                                       fit: BoxFit.fill)),
-                            )),
+                            ),
                             const SizedBox(
                               width: 50,
                             ),

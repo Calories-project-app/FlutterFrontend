@@ -21,7 +21,7 @@ class _LoginState extends State<Login> {
 
   Future<void> _login() async {
     final response = await http.post(
-      Uri.parse('https://foodcal-app.up.railway.app/auth/login'),
+      Uri.parse('https://foodcal-api-latest.onrender.com/auth/login'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -146,7 +146,7 @@ class _LoginState extends State<Login> {
                                       onPressed: () {
                                         print(_isObscured);
                                         setState(() {
-                                          _isObscured =! _isObscured;
+                                          _isObscured = !_isObscured;
                                         });
                                       },
                                       icon: _isObscured

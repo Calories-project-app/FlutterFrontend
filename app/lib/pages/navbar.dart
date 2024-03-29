@@ -41,7 +41,8 @@ class _NavbarState extends State<Navbar> {
   }
 
   Future getImage() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.camera, imageQuality: 80);
+    final pickedFile =
+        await _picker.pickImage(source: ImageSource.camera, imageQuality: 80);
 
     if (pickedFile != null) {
       image = File(pickedFile.path);
@@ -50,7 +51,7 @@ class _NavbarState extends State<Navbar> {
       print("No Image Selected");
     }
 
-    return image; 
+    return image;
   }
 
   @override
@@ -60,6 +61,7 @@ class _NavbarState extends State<Navbar> {
 
   @override
   Widget build(BuildContext context) {
+    bool showFab = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomAppBar(
@@ -70,6 +72,7 @@ class _NavbarState extends State<Navbar> {
           children: <Widget>[
             IconButton(
               icon: const Icon(Icons.home),
+              color: _currentIndex == 0 ?  Colors.black:Colors.white ,
               onPressed: () {
                 setState(() {
                   _currentIndex = 0;
@@ -78,6 +81,7 @@ class _NavbarState extends State<Navbar> {
             ),
             IconButton(
               icon: const Icon(Icons.leaderboard),
+              color: _currentIndex == 1 ?  Colors.black:  Colors.white,
               onPressed: () {
                 setState(() {
                   _currentIndex = 1;
@@ -87,6 +91,7 @@ class _NavbarState extends State<Navbar> {
             const SizedBox(), // Empty space for the centered FAB
             IconButton(
               icon: const Icon(Icons.group),
+              color: _currentIndex == 2 ?  Colors.black : Colors.white,
               onPressed: () {
                 setState(() {
                   _currentIndex = 2;
@@ -95,6 +100,7 @@ class _NavbarState extends State<Navbar> {
             ),
             IconButton(
               icon: const Icon(Icons.settings),
+              color: _currentIndex == 3 ?  Colors.black :Colors.white,
               onPressed: () {
                 setState(() {
                   _currentIndex = 3;
@@ -104,23 +110,27 @@ class _NavbarState extends State<Navbar> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          final selectedImage = await getImage();
-          if(selectedImage != null) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PreviewImagePage( imagePath: selectedImage,)),
-            );
-          }
-        },
-        backgroundColor: primaryColor,
-        child: const Icon(Icons.camera_alt),
-        shape: CircleBorder(),
+      floatingActionButton: Visibility(
+        visible: !showFab,
+        child: FloatingActionButton(
+          onPressed: () async {
+            final selectedImage = await getImage();
+            if (selectedImage != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PreviewImagePage(
+                          imagePath: selectedImage,
+                        )),
+              );
+            }
+          },
+          backgroundColor: primaryColor,
+          child: const Icon(Icons.camera_alt, color: Colors.white,),
+          shape: CircleBorder(),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      
-
     );
   }
 }

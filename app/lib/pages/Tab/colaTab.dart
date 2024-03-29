@@ -24,7 +24,7 @@ class _ColaTabTabState extends State<ColaTab> {
             child: Material(
               child: InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) =>
                             const ConfirmWater()));
                   },
@@ -45,15 +45,14 @@ class _ColaTabTabState extends State<ColaTab> {
                             SizedBox(
                               width: 20,
                             ),
-                            Positioned(
-                                child: Container(
-                              height: 55,
-                              width: 50,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage('assets/cola-4.png'),
-                                      fit: BoxFit.fill)),
-                            )),
+                            Container(
+                                                          height: 55,
+                                                          width: 50,
+                                                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/cola-4.png'),
+                                  fit: BoxFit.fill)),
+                                                        ),
                             SizedBox(
                               width: 30,
                             ),
@@ -102,7 +101,7 @@ class _ColaTabTabState extends State<ColaTab> {
             child: Material(
               child: InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) =>
                             const ConfirmWater()));
                   },
@@ -123,15 +122,14 @@ class _ColaTabTabState extends State<ColaTab> {
                             SizedBox(
                               width: 20,
                             ),
-                            Positioned(
-                                child: Container(
-                              height: 55,
-                              width: 50,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage('assets/cola-4.png'),
-                                      fit: BoxFit.fill)),
-                            )),
+                            Container(
+                                                          height: 55,
+                                                          width: 50,
+                                                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/cola-4.png'),
+                                  fit: BoxFit.fill)),
+                                                        ),
                             SizedBox(
                               width: 30,
                             ),
@@ -180,7 +178,7 @@ class _ColaTabTabState extends State<ColaTab> {
             child: Material(
               child: InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) =>
                             const ConfirmWater()));
                   },
@@ -201,15 +199,14 @@ class _ColaTabTabState extends State<ColaTab> {
                             const SizedBox(
                               width: 20,
                             ),
-                            Positioned(
-                                child: Container(
-                              height: 55,
-                              width: 50,
-                              decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage('assets/cola-4.png'),
-                                      fit: BoxFit.fill)),
-                            )),
+                            Container(
+                                                          height: 55,
+                                                          width: 50,
+                                                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/cola-4.png'),
+                                  fit: BoxFit.fill)),
+                                                        ),
                             const SizedBox(
                               width: 30,
                             ),

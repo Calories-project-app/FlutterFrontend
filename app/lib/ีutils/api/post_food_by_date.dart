@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class FoodHistoryApi {
   static const String baseUrl =
-      "https://foodcal-app.up.railway.app/food-history/foodHistory";
+      "https://foodcal-api-latest.onrender.com/food-history/foodHistory";
 
   static Future<List<FoodItem>> getFoodHistory(
       String userId, String date, String token) async {

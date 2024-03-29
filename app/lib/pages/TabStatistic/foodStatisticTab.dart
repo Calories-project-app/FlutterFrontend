@@ -27,6 +27,7 @@ class _FoodStatisticTabState extends State<FoodStatisticTab> {
   final _controller = DatePickerController();
   late Future<List<FoodItem>> foodHistory = Future.value([]);
   DateTime _selectedDate = DateTime.now();
+
   @override
   void initState() {
     super.initState();
@@ -41,7 +42,8 @@ class _FoodStatisticTabState extends State<FoodStatisticTab> {
     String? _userId = await Shared.getUserId();
     String? userId = _userId;
     String? _token = await Shared.getToken();
-    String date = DateFormat('yyyy-MM-dd').format(_selectedDate); // Use selectedDate
+    String date =
+        DateFormat('yyyy-MM-dd').format(_selectedDate); // Use selectedDate
     String? token = _token;
     print('This is Select from function ${_selectedDate}');
     try {
@@ -88,40 +90,45 @@ class _FoodStatisticTabState extends State<FoodStatisticTab> {
                 },
               ),
             ),
-            
             Container(
               child: GestureDetector(
                 onTap: () {
-                     _controller.animateToDate(DateTime.now());
+                  _controller.animateToDate(DateTime.now());
                 },
                 child: Container(
                   width: size.width * 0.2,
-                  height:size.height *0.13,
+                  height: size.height * 0.13,
                   decoration: BoxDecoration(
-                    color: primaryColor , 
-                    borderRadius: BorderRadius.circular(13)
-                  ),
+                      color: primaryColor,
+                      borderRadius: BorderRadius.circular(13)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Go', style: GoogleFonts.openSans(
-                        fontSize : 16, 
-                        fontWeight : FontWeight.bold, 
-                        color : Colors.white
-                      ),), 
-                      Text( 'To', style: GoogleFonts.openSans(
-                        fontSize : 16, 
-                        fontWeight : FontWeight.bold, 
-                        color : Colors.white),),
-                      Text('Current', style: GoogleFonts.openSans(
-                        fontSize : 16, 
-                        fontWeight : FontWeight.bold, 
-                        color : Colors.white),)
+                      Text(
+                        'Go',
+                        style: GoogleFonts.openSans(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      Text(
+                        'To',
+                        style: GoogleFonts.openSans(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      Text(
+                        'Current',
+                        style: GoogleFonts.openSans(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      )
                     ],
                   ),
                 ),
-                
               ),
             )
           ],
@@ -129,7 +136,7 @@ class _FoodStatisticTabState extends State<FoodStatisticTab> {
         SizedBox(
           height: size.height * 0.01,
         ),
-        Row(
+        /*Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
@@ -235,7 +242,7 @@ class _FoodStatisticTabState extends State<FoodStatisticTab> {
                   ],
                 ))
           ],
-        ),
+        ),*/
         Expanded(
           child: Container(
             child: FutureBuilder<List<FoodItem>>(
@@ -350,7 +357,7 @@ class _FoodStatisticTabState extends State<FoodStatisticTab> {
                                             fontWeight: FontWeight.w700),
                                       ),
                                       Text(
-                                        '25 Grams',
+                                        '${(foodItem.protein).toStringAsFixed(2)} Grams',
                                         style: GoogleFonts.openSans(
                                             fontSize: 10,
                                             color: tertiaryColor,
@@ -368,7 +375,7 @@ class _FoodStatisticTabState extends State<FoodStatisticTab> {
                                             fontWeight: FontWeight.w700),
                                       ),
                                       Text(
-                                        '25 Grams',
+                                        '${(foodItem.carbohydrate).toStringAsFixed(2)} Grams',
                                         style: GoogleFonts.openSans(
                                             fontSize: 10,
                                             color: tertiaryColor,
@@ -386,7 +393,7 @@ class _FoodStatisticTabState extends State<FoodStatisticTab> {
                                             fontWeight: FontWeight.w700),
                                       ),
                                       Text(
-                                        '25 Grams',
+                                        '${(foodItem.fat).toStringAsFixed(2)} Grams',
                                         style: GoogleFonts.openSans(
                                             fontSize: 10,
                                             color: tertiaryColor,

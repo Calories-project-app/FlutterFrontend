@@ -28,7 +28,7 @@ class Shared {
   static Future<String?> getUserId() async {
     final userInfo = await getUserInfo();
     if (userInfo != null) {
-      return userInfo['_id']; // Return the user ID directly
+      return userInfo['_id'].toString(); // Return the user ID directly
     }
     return null; // Return null if user info is not available
   }

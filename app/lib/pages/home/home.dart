@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
     try {
       final response = await http.post(
         Uri.parse(
-            'https://foodcal-app.up.railway.app/food-history/foodHistory/oneDayStatistics'),
+            'https://foodcal-api-latest.onrender.com/food-history/foodHistory/oneDayStatistics'),
         headers: <String, String>{
           'Content-Type': 'application/json',
           'Authorization': token,

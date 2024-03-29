@@ -4,6 +4,7 @@ import 'package:app/pages/Tab/colaTab.dart';
 import 'package:app/pages/Tab/teaTab.dart';
 import 'package:app/pages/Tab/water.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddWater extends StatefulWidget {
@@ -32,18 +33,18 @@ class _AddWaterState extends State<AddWater> {
   int current = 0;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: SafeArea(
-        top: true,
+      body: Container(
         child: Stack(
           children: [
             Align(
-              alignment: const AlignmentDirectional(0, -1.75),
+              alignment: const AlignmentDirectional(0, -1.05),
               child: Container(
                 width: 394,
                 height: 300,
@@ -53,7 +54,7 @@ class _AddWaterState extends State<AddWater> {
               ),
             ),
             Align(
-              alignment: const AlignmentDirectional(-1.39, -1.05),
+              alignment: const AlignmentDirectional(-1.39, -0.75),
               child: Container(
                 width: 160,
                 height: 160,
@@ -65,7 +66,7 @@ class _AddWaterState extends State<AddWater> {
               ),
             ),
             Align(
-              alignment: const AlignmentDirectional(1.58, -1.66),
+              alignment: const AlignmentDirectional(1.58, -1.26),
               child: Container(
                 width: 160,
                 height: 160,
@@ -77,7 +78,7 @@ class _AddWaterState extends State<AddWater> {
               ),
             ),
             Align(
-              alignment: AlignmentDirectional(0, 1.85),
+              alignment: AlignmentDirectional(0, 0.85),
               child: Container(
                 width: 395,
                 height: 643,
@@ -95,10 +96,10 @@ class _AddWaterState extends State<AddWater> {
                     SizedBox(
                       height: 20,
                     ),
-                    SizedBox(
+                    Container(
                       height: 95,
-                      width: double.infinity,
-                      child: SizedBox(
+                      width: size.width,
+                      child: Container(
                         height: 95,
                         child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
@@ -135,20 +136,20 @@ class _AddWaterState extends State<AddWater> {
                                   duration: const Duration(microseconds: 300),
                                   child: Column(
                                     children: [
-                                      Positioned(
-                                          child: Container(
+                                      Container(
                                         height: 65,
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
                                                 image: AssetImage(imageUrl),
                                                 fit: BoxFit.cover)),
-                                      )),
+                                      ),
                                       Center(
                                           child: Text(itemType,
                                               style: GoogleFonts.openSans(
                                                   fontSize: 11,
                                                   color: Color(0xFF594949),
-                                                  fontWeight: FontWeight.w500))),
+                                                  fontWeight:
+                                                      FontWeight.w500))),
                                     ],
                                   ),
                                 ),
@@ -160,9 +161,7 @@ class _AddWaterState extends State<AddWater> {
                       margin: EdgeInsets.only(top: 30),
                       width: double.infinity,
                       child: Column(
-                        children: [
-                          _pages[current]
-                        ],
+                        children: [_pages[current]],
                       ),
                     )
                   ],
@@ -173,7 +172,7 @@ class _AddWaterState extends State<AddWater> {
               child: Stack(
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(-0.75, -1.02),
+                    alignment: AlignmentDirectional(-0.75, -0.70),
                     child: Text(
                       'Choose water',
                       style: GoogleFonts.openSans(

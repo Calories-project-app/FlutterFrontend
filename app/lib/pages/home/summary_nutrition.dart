@@ -161,8 +161,8 @@ class Summary_Nutrition extends StatelessWidget {
                               height: 20,
                             ),
                             CircularPercentIndicator(
-                                radius: 60,
-                                lineWidth: 5,
+                                radius: 56,
+                                lineWidth: 4,
                                 backgroundColor: Colors.grey,
                                 progressColor: Colors.orange,
                                 percent: percent > 1 ? 1 : percent,

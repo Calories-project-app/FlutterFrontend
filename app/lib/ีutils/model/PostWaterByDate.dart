@@ -1,45 +1,16 @@
 import 'dart:convert';
 
 class WaterHistory {
-  List<WaterHistoryItem> waterHistory;
-  int totalCalories;
-  int totalLitre;
-  int totalCaffeine;
-  int totalSugar;
-
-  WaterHistory({
-    required this.waterHistory,
-    required this.totalCalories,
-    required this.totalLitre,
-    required this.totalCaffeine,
-    required this.totalSugar,
-  });
-
-  factory WaterHistory.fromJson(Map<String, dynamic> json) {
-    List<dynamic> foodHistoryJson = json['foodHistory'];
-    List<dynamic> waterHistoryJson = json['waterHistory'];
-
-    return WaterHistory(
-      waterHistory: waterHistoryJson.map((e) => WaterHistoryItem.fromJson(e)).toList(),
-      totalCalories: json['totalCalories'],
-      totalLitre: json['totalLitre'],
-      totalCaffeine: json['totalCaffeine'],
-      totalSugar: json['totalSugar'], 
-    );
-  }
-}
-
-class WaterHistoryItem {
   String id;
   String userId;
   String waterName;
-  int calories;
-  int caffeine;
-  int sugar;
-  int intake;
-  DateTime time;
+  double calories;
+  double caffeine;
+  double sugar;
+  double intake;
+  String time;
 
-  WaterHistoryItem({
+  WaterHistory({
     required this.id,
     required this.userId,
     required this.waterName,
@@ -50,58 +21,16 @@ class WaterHistoryItem {
     required this.time,
   });
 
-  factory WaterHistoryItem.fromJson(Map<String, dynamic> json) {
-    return WaterHistoryItem(
+  factory WaterHistory.fromJson(Map<String, dynamic> json) {
+    return WaterHistory(
       id: json['_id'],
       userId: json['userId'],
       waterName: json['waterName'],
-      calories: json['calories'],
-      caffeine: json['caffeine'],
-      sugar: json['sugar'],
-      intake: json['intake'],
-      time: DateTime.parse(json['time']),
-    );
-  }
-}
-
-/*
-import 'dart:convert';
-
-class FoodItem {
-  String id;
-  String userId;
-  String foodName;
-  double calories;
-  double fat;
-  double carbohydrate;
-  double protein;
-  String imgPath;
-  String time;
-
-  FoodItem({
-    required this.id,
-    required this.userId,
-    required this.foodName,
-    required this.calories,
-    required this.fat,
-    required this.carbohydrate,
-    required this.protein,
-    required this.imgPath,
-    required this.time,
-  });
-
-  factory FoodItem.fromJson(Map<String, dynamic> json) {
-    return FoodItem(
-      id: json['_id'],
-      userId: json['userId'],
-      foodName: json['foodName'],
       calories: json['calories'].toDouble(),
-      fat: json['fat'].toDouble(),
-      carbohydrate: json['carbohydate'].toDouble(),
-      protein: json['protein'].toDouble(),
-      imgPath: json['imgPath'],
+      caffeine: json['caffeine'].toDouble(),
+      sugar: json['sugar'].toDouble(),
+      intake: json['intake'].toDouble(),
       time: json['time'],
     );
   }
 }
-*/

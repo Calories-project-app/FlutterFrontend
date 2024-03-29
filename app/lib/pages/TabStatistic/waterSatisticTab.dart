@@ -24,12 +24,13 @@ DatePickerController _datePickerController = DatePickerController();
 
 class _WaterStatisticTabState extends State<WaterStatisticTab> {
   final _controller = DatePickerController();
-  late Future<WaterHistory> waterHistory = Future.value([] as FutureOr<WaterHistory>?);
+  late Future<List<WaterHistory>> waterHistory = Future.value([]);
   DateTime _selectedDate = DateTime.now();
 
   @override
   void initState() {
     super.initState();
+
     fetchWaterHistory(); // Call fetchWaterHistory when the widget initializes
   }
 
@@ -41,11 +42,12 @@ class _WaterStatisticTabState extends State<WaterStatisticTab> {
     String? _userId = await Shared.getUserId();
     String? userId = _userId;
     String? _token = await Shared.getToken();
-    String date = DateFormat('yyyy-MM-dd').format(_selectedDate); // Use selectedDate
+    String date =
+        DateFormat('yyyy-MM-dd').format(_selectedDate); // Use selectedDate
     String? token = _token;
-    print('This is Select from function $_selectedDate');
+    print('This is Select from function ${_selectedDate}');
     try {
-      WaterHistory history =
+      List<WaterHistory> history =
           await WaterHistoryApi.fetchWaterHistory(userId!, date, token!);
       setState(() {
         waterHistory = Future.value(history);
@@ -128,118 +130,120 @@ class _WaterStatisticTabState extends State<WaterStatisticTab> {
           ],
         ),
         SizedBox(
-          height: size.height * 0.01,
+          height: size.height * 0.03,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                Text(
-                  'Protein',
-                  style: GoogleFonts.openSans(
-                      fontSize: 14,
-                      color: tertiaryColor,
-                      fontWeight: FontWeight.w700),
-                ),
-                LinearPercentIndicator(
-                    lineHeight: 5.0,
+        /*Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    'Caffeine',
+                    style: GoogleFonts.openSans(
+                        fontSize: 14,
+                        color: tertiaryColor,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  LinearPercentIndicator(
+                      lineHeight: 5.0,
+                      width: 80,
+                      percent: 0.8,
+                      barRadius: const Radius.circular(15),
+                      progressColor: Colors.purple),
+                  Text(
+                    '{} Grams',
+                    style: GoogleFonts.openSans(
+                        fontSize: 10,
+                        color: tertiaryColor,
+                        fontWeight: FontWeight.w400),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    'Carbs',
+                    style: GoogleFonts.openSans(
+                        fontSize: 14,
+                        color: tertiaryColor,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  LinearPercentIndicator(
+                      width: 80,
+                      lineHeight: 5.0,
+                      percent: 0.8,
+                      barRadius: const Radius.circular(15),
+                      progressColor: Colors.lightBlue),
+                  Text(
+                    '15/25 Grams',
+                    style: GoogleFonts.openSans(
+                        fontSize: 10,
+                        color: tertiaryColor,
+                        fontWeight: FontWeight.w400),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    'Fat',
+                    style: GoogleFonts.openSans(
+                        fontSize: 14,
+                        color: tertiaryColor,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  LinearPercentIndicator(
                     width: 80,
+                    lineHeight: 5.0,
                     percent: 0.8,
                     barRadius: const Radius.circular(15),
-                    progressColor: Colors.purple),
-                Text(
-                  '15/25 Grams',
-                  style: GoogleFonts.openSans(
-                      fontSize: 10,
-                      color: tertiaryColor,
-                      fontWeight: FontWeight.w400),
-                )
-              ],
-            ),
-            Column(
-              children: [
-                Text(
-                  'Carbs',
-                  style: GoogleFonts.openSans(
-                      fontSize: 14,
-                      color: tertiaryColor,
-                      fontWeight: FontWeight.w700),
-                ),
-                LinearPercentIndicator(
-                    width: 80,
-                    lineHeight: 5.0,
-                    percent: 0.8,
-                    barRadius: const Radius.circular(15),
-                    progressColor: Colors.lightBlue),
-                Text(
-                  '15/25 Grams',
-                  style: GoogleFonts.openSans(
-                      fontSize: 10,
-                      color: tertiaryColor,
-                      fontWeight: FontWeight.w400),
-                )
-              ],
-            ),
-            Column(
-              children: [
-                Text(
-                  'Fat',
-                  style: GoogleFonts.openSans(
-                      fontSize: 14,
-                      color: tertiaryColor,
-                      fontWeight: FontWeight.w700),
-                ),
-                LinearPercentIndicator(
-                  width: 80,
-                  lineHeight: 5.0,
-                  percent: 0.8,
-                  barRadius: const Radius.circular(15),
+                    progressColor: Colors.orange,
+                  ),
+                  Text(
+                    '15/25 Grams',
+                    style: GoogleFonts.openSans(
+                        fontSize: 10,
+                        color: tertiaryColor,
+                        fontWeight: FontWeight.w400),
+                  ),
+                ],
+              ),
+              CircularPercentIndicator(
+                  radius: 40,
+                  lineWidth: 5,
+                  backgroundColor: Colors.grey,
                   progressColor: Colors.orange,
-                ),
-                Text(
-                  '15/25 Grams',
-                  style: GoogleFonts.openSans(
-                      fontSize: 10,
-                      color: tertiaryColor,
-                      fontWeight: FontWeight.w400),
-                ),
-              ],
-            ),
-            CircularPercentIndicator(
-                radius: 40,
-                lineWidth: 5,
-                backgroundColor: Colors.grey,
-                progressColor: Colors.orange,
-                percent: 0.6,
-                center: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 25,
-                    ),
-                    Text(
-                      '867',
-                      style: GoogleFonts.openSans(
-                          fontSize: 14,
-                          color: primaryColor,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    Text(
-                      'calories left',
-                      style: GoogleFonts.openSans(
-                          fontSize: 10,
-                          color: secondaryColor,
-                          fontWeight: FontWeight.w700),
-                    )
-                  ],
-                ))
-          ],
-        ),
+                  percent: 0.6,
+                  center: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Text(
+                        '867',
+                        style: GoogleFonts.openSans(
+                            fontSize: 14,
+                            color: primaryColor,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Text(
+                        'calories left',
+                        style: GoogleFonts.openSans(
+                            fontSize: 10,
+                            color: secondaryColor,
+                            fontWeight: FontWeight.w700),
+                      )
+                    ],
+                  ))
+            ],
+          ),
+        ),*/
         Expanded(
           child: Container(
-            child: FutureBuilder<WaterHistory>(
+            child: FutureBuilder<List<WaterHistory>>(
               future: waterHistory,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -253,18 +257,36 @@ class _WaterStatisticTabState extends State<WaterStatisticTab> {
                     child: Text('Error: ${snapshot.error}'),
                   );
                 } else {
-                  final WaterHistory? waterHistory = snapshot.data;
-                  if (waterHistory == null || waterHistory.waterHistory.isEmpty) {
+                  final List<WaterHistory>? waterHistory = snapshot.data;
+                  if (waterHistory == null || waterHistory.isEmpty) {
                     return Center(
                       child: Text('No water history available'),
                     );
                   }
                   return ListView.builder(
-                    itemCount: waterHistory.waterHistory.length,
+                    itemCount: waterHistory.length,
                     itemBuilder: (context, index) {
-                      var waterItem = waterHistory.waterHistory[index];
+                      var waterItem = waterHistory[index];
+
+                      String imageUrl = '';
+
+                      if (waterItem.waterName == 'กาแฟ') {
+                        imageUrl =
+                            'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/1280px-A_small_cup_of_coffee.JPG';
+                      } else if (waterItem.waterName == 'น้ำ') {
+                        imageUrl =
+                            'https://s.isanook.com/wo/0/ud/8/41169/waterglass.jpg';
+                      } else if (waterItem.waterName == 'น้ำอัดลม') {
+                        imageUrl =
+                            'https://fit-d.com/image_webp/f?src=./uploads/food/a3e53414c16884a2f78efbd8bd9dc5e7.jpeg';
+                      } else if (waterItem.waterName == 'ชา') {
+                        imageUrl =
+                            'https://img.lazcdn.com/g/p/5c0a9c16846466e513502262baae63cc.jpg_720x720q80.jpg';
+                      }
+
                       return Container(
                         width: MediaQuery.of(context).size.width,
+                        height: size.height * 0.17,
                         margin: EdgeInsets.symmetric(vertical: 8.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
@@ -298,7 +320,7 @@ class _WaterStatisticTabState extends State<WaterStatisticTab> {
                                             MediaQuery.of(context).size.width *
                                                 0.2,
                                         fit: BoxFit.fitHeight,
-                                        '${waterItem.waterName ?? "https://s.isanook.com/wo/0/ud/36/180929/f.jpg?ip/crop/w670h402/q80/jpg"}',
+                                        imageUrl,
                                       ),
                                     ),
                                   ),
@@ -310,32 +332,56 @@ class _WaterStatisticTabState extends State<WaterStatisticTab> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text('${waterItem.waterName ?? "N/A"}'),
-                                        SizedBox(height: 5),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              '${waterItem.calories ?? "N/A"}',
+                                        Text(
+                                          '${waterItem.waterName ?? "N/A"}',
+                                          style: GoogleFonts.openSans(
+                                              fontSize: 19,
+                                              color: tertiaryColor,
+                                              fontWeight: FontWeight.w700),
+                                        ),
+                                        SizedBox(height: size.height * 0.005),
+                                        RichText(
+                                          text: TextSpan(
+                                              text: '${waterItem.intake}',
                                               style: GoogleFonts.openSans(
-                                                fontSize: 22,
-                                                color: tertiaryColor,
-                                                fontWeight: FontWeight.w700,
-                                              ),
-                                            ),
-                                            Text(
-                                              ' calories',
-                                              style: GoogleFonts.openSans(
-                                                fontSize: 12,
-                                                color: secondaryColor,
-                                                fontWeight: FontWeight.w300,
-                                              ),
-                                            ),
-                                          ],
+                                                  fontSize: 19,
+                                                  color: tertiaryColor,
+                                                  fontWeight: FontWeight.w700),
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text: ' mL',
+                                                  style: GoogleFonts.openSans(
+                                                      fontSize: 16,
+                                                      color: greyColor,
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                ),
+                                                TextSpan(
+                                                  text:
+                                                      ' ${waterItem.calories}',
+                                                  style: GoogleFonts.openSans(
+                                                      fontSize: 19,
+                                                      color: tertiaryColor,
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                ),
+                                                TextSpan(
+                                                  text: ' Calories',
+                                                  style: GoogleFonts.openSans(
+                                                      fontSize: 16,
+                                                      color: greyColor,
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                                ),
+                                              ]),
                                         ),
                                       ],
                                     ),
                                   )
                                 ],
+                              ),
+                              SizedBox(
+                                height: size.height * 0.005,
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -344,14 +390,14 @@ class _WaterStatisticTabState extends State<WaterStatisticTab> {
                                   Column(
                                     children: [
                                       Text(
-                                        'Protein',
+                                        'Caffeine',
                                         style: GoogleFonts.openSans(
                                             fontSize: 14,
-                                            color: Colors.purple,
+                                            color: Color(0xFF3F2929),
                                             fontWeight: FontWeight.w700),
                                       ),
                                       Text(
-                                        '25 Grams',
+                                        '${waterItem.caffeine} Grams',
                                         style: GoogleFonts.openSans(
                                             fontSize: 10,
                                             color: tertiaryColor,
@@ -362,32 +408,14 @@ class _WaterStatisticTabState extends State<WaterStatisticTab> {
                                   Column(
                                     children: [
                                       Text(
-                                        'Carbs',
+                                        'Sugar',
                                         style: GoogleFonts.openSans(
                                             fontSize: 14,
-                                            color: Colors.lightBlue,
+                                            color: Colors.pinkAccent,
                                             fontWeight: FontWeight.w700),
                                       ),
                                       Text(
-                                        '25 Grams',
-                                        style: GoogleFonts.openSans(
-                                            fontSize: 10,
-                                            color: tertiaryColor,
-                                            fontWeight: FontWeight.w400),
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        'Fat',
-                                        style: GoogleFonts.openSans(
-                                            fontSize: 14,
-                                            color: Colors.orange,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      Text(
-                                        '25 Grams',
+                                        '${waterItem.sugar} Grams',
                                         style: GoogleFonts.openSans(
                                             fontSize: 10,
                                             color: tertiaryColor,

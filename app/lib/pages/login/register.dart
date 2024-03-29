@@ -85,6 +85,7 @@ class _RegisterState extends State<Register> {
                             
                             controller: _email,
                             decoration: InputDecoration(
+                              hintText: 'Email',
                                 border: OutlineInputBorder(),
                                 ),
                           ),
@@ -103,6 +104,7 @@ class _RegisterState extends State<Register> {
                             obscureText: _isObscured,
                             controller: _password,
                             decoration: InputDecoration(
+                              hintText: 'Password',
                                 border: OutlineInputBorder(),
                                 suffixIcon: IconButton(
                                     onPressed: () {
@@ -131,6 +133,7 @@ class _RegisterState extends State<Register> {
                             controller: _confirmPassword,
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(),
+                                hintText: 'Password',
                                 suffixIcon: IconButton(
                                     onPressed: () {
                                       print(_isObscured);
